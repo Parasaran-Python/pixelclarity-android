@@ -1,0 +1,362 @@
+-- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:30:9-38:20
+	android:grantUriPermissions
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:34:13-47
+	android:authorities
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:32:13-64
+	android:exported
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:33:13-37
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:31:13-62
+manifest
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:2:1-42:12
+MERGED from [androidx.databinding:viewbinding:8.7.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7443cdcea5454dacc8be45bb60628d12/transformed/viewbinding-8.7.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.material:material:1.12.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/43c4620d0e2348ab926f9655fadce8db/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6be6c53b18b4b34681611a277d23212f/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/13c9f9761f2a772a71179d22920813fa/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/302c2638ab84bb4e260bec29c6b8ceca/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.github.bumptech.glide:glide:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/51fd38c757ae74ed22b502d79423ff7b/transformed/glide-4.16.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6545c5033479bbe86fcaa24ee3cda97d/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.5.4] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3e58f40851ab265b5c5fc68833466093/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/09b7bf0dcb5a3498219e4fa89f02166c/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/60d606acb0cc5030ead873b05e634280/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/25e6a086ca805067c72612da256de3ae/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a60e276a4f0222802c54f9b5525bfc22/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e233f0f407a4425b0730a04c7612f1c7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/161f55e6ce8c2db48fb4c1c5afbbf5cb/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/06e15490d7ab8c1599b1ce54c4518a64/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7c65705d99dedd11245c91d94a29f0f0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/d8d4c8fb35b3310649d6783eb5a7e1d5/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cfdb02edb0e4c844a311a3ebd64e4a0c/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46a658b6fdc516fa2cfa7b71f9b028a7/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/5780bce4aae37ad7bb988377f5a91037/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1f4db46ea3e14a553de79adeb032802a/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/298480160fe17dcd82ec609a8d24f8ad/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ab7699e2b60798477bf8a1fe31fa56b4/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/013a3f09dd03c0079fe33c0c33428ef7/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3874a7a546a5104ab87afb25db9d57ad/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ed4cb6d45a9cc763913ba4998e6a644c/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9eaed58601c825aaa8bf516ae3009136/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fc399572eb7ff406dac7a415b407d5e5/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/84388920e43d85839f7fdb2a071bf9e5/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9ecca0e4c92ee826365959b774afd5b4/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46f0f8df5a049db3ca6ae4698a0bb158/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/17e106e72c2fb3f692ada600f003d37b/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/52f64c9378f5bc5dda71e2fd8f13af6a/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/de4f0dad5e75da6d3d93c929faa27c01/transformed/core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/c1f6d1984d0813fab3cda43d2dc186fb/transformed/exifinterface-1.3.7/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/b6fac5a7f66c5b85f6baf8ad7394dc03/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1ce1c476414aee4b8cd112342957a471/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/62f940ccbbd7cb7239f4493f4c364fd9/transformed/gifdecoder-4.16.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7a50d8a1a7f5c7e95f86f1531967a8fc/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cd027d887267f0fcbf0ee30ab6f5467a/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/235cc6c91c4c943af284e4ca99cfffa8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fa633160b2730208a672245498790388/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/011490ab10936165ed620ce1b841ed61/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/231a6d146b315ee23c6aefa7816a3fdc/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e28b9057842d90c439866a07bbdc55bf/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/407de8285299b22372db7baaefd6b19e/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.microsoft.onnxruntime:onnxruntime-android:1.20.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/255ed396a15a4d91ade99ac537368739/transformed/onnxruntime-android-1.20.0/AndroidManifest.xml:2:1-7:12
+	package
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:4:5-76
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:4:22-73
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:5:5-107
+	android:maxSdkVersion
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:5:78-104
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:5:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:6:5-108
+	android:maxSdkVersion
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:6:79-105
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:6:22-78
+application
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:8:5-40:19
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:8:5-40:19
+MERGED from [com.google.android.material:material:1.12.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/43c4620d0e2348ab926f9655fadce8db/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/43c4620d0e2348ab926f9655fadce8db/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6be6c53b18b4b34681611a277d23212f/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6be6c53b18b4b34681611a277d23212f/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/235cc6c91c4c943af284e4ca99cfffa8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/235cc6c91c4c943af284e4ca99cfffa8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:13:9-41
+	android:hardwareAccelerated
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:16:9-43
+	android:fullBackupContent
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:11:9-54
+	android:roundIcon
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:14:9-54
+	android:largeHeap
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:17:9-33
+	android:icon
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:12:9-43
+	android:allowBackup
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:9:9-35
+	android:theme
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:18:9-56
+	android:dataExtractionRules
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:10:9-65
+activity#com.pv.realesrgan.ui.MainActivity
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:20:9-28:20
+	android:exported
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:22:13-36
+	android:configChanges
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:23:13-87
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:21:13-44
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:24:13-27:29
+action#android.intent.action.MAIN
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:26:17-77
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:26:27-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:35:13-37:54
+	android:resource
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:37:17-51
+	android:name
+		ADDED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml:36:17-67
+uses-sdk
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:8.7.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7443cdcea5454dacc8be45bb60628d12/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.7.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7443cdcea5454dacc8be45bb60628d12/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.12.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/43c4620d0e2348ab926f9655fadce8db/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/43c4620d0e2348ab926f9655fadce8db/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6be6c53b18b4b34681611a277d23212f/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6be6c53b18b4b34681611a277d23212f/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/13c9f9761f2a772a71179d22920813fa/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/13c9f9761f2a772a71179d22920813fa/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/302c2638ab84bb4e260bec29c6b8ceca/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/302c2638ab84bb4e260bec29c6b8ceca/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [com.github.bumptech.glide:glide:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/51fd38c757ae74ed22b502d79423ff7b/transformed/glide-4.16.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:glide:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/51fd38c757ae74ed22b502d79423ff7b/transformed/glide-4.16.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6545c5033479bbe86fcaa24ee3cda97d/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/6545c5033479bbe86fcaa24ee3cda97d/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3e58f40851ab265b5c5fc68833466093/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3e58f40851ab265b5c5fc68833466093/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/09b7bf0dcb5a3498219e4fa89f02166c/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/09b7bf0dcb5a3498219e4fa89f02166c/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/60d606acb0cc5030ead873b05e634280/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/60d606acb0cc5030ead873b05e634280/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/25e6a086ca805067c72612da256de3ae/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/25e6a086ca805067c72612da256de3ae/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a60e276a4f0222802c54f9b5525bfc22/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a60e276a4f0222802c54f9b5525bfc22/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e233f0f407a4425b0730a04c7612f1c7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e233f0f407a4425b0730a04c7612f1c7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/161f55e6ce8c2db48fb4c1c5afbbf5cb/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/161f55e6ce8c2db48fb4c1c5afbbf5cb/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/06e15490d7ab8c1599b1ce54c4518a64/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/06e15490d7ab8c1599b1ce54c4518a64/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7c65705d99dedd11245c91d94a29f0f0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7c65705d99dedd11245c91d94a29f0f0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/d8d4c8fb35b3310649d6783eb5a7e1d5/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/d8d4c8fb35b3310649d6783eb5a7e1d5/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cfdb02edb0e4c844a311a3ebd64e4a0c/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cfdb02edb0e4c844a311a3ebd64e4a0c/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46a658b6fdc516fa2cfa7b71f9b028a7/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46a658b6fdc516fa2cfa7b71f9b028a7/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/5780bce4aae37ad7bb988377f5a91037/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/5780bce4aae37ad7bb988377f5a91037/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1f4db46ea3e14a553de79adeb032802a/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1f4db46ea3e14a553de79adeb032802a/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/298480160fe17dcd82ec609a8d24f8ad/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/298480160fe17dcd82ec609a8d24f8ad/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ab7699e2b60798477bf8a1fe31fa56b4/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ab7699e2b60798477bf8a1fe31fa56b4/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/013a3f09dd03c0079fe33c0c33428ef7/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/013a3f09dd03c0079fe33c0c33428ef7/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3874a7a546a5104ab87afb25db9d57ad/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/3874a7a546a5104ab87afb25db9d57ad/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ed4cb6d45a9cc763913ba4998e6a644c/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/ed4cb6d45a9cc763913ba4998e6a644c/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9eaed58601c825aaa8bf516ae3009136/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9eaed58601c825aaa8bf516ae3009136/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fc399572eb7ff406dac7a415b407d5e5/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fc399572eb7ff406dac7a415b407d5e5/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/84388920e43d85839f7fdb2a071bf9e5/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/84388920e43d85839f7fdb2a071bf9e5/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9ecca0e4c92ee826365959b774afd5b4/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/9ecca0e4c92ee826365959b774afd5b4/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46f0f8df5a049db3ca6ae4698a0bb158/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/46f0f8df5a049db3ca6ae4698a0bb158/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/17e106e72c2fb3f692ada600f003d37b/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/17e106e72c2fb3f692ada600f003d37b/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/52f64c9378f5bc5dda71e2fd8f13af6a/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/52f64c9378f5bc5dda71e2fd8f13af6a/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/de4f0dad5e75da6d3d93c929faa27c01/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/de4f0dad5e75da6d3d93c929faa27c01/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/c1f6d1984d0813fab3cda43d2dc186fb/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/c1f6d1984d0813fab3cda43d2dc186fb/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/b6fac5a7f66c5b85f6baf8ad7394dc03/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/b6fac5a7f66c5b85f6baf8ad7394dc03/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1ce1c476414aee4b8cd112342957a471/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/1ce1c476414aee4b8cd112342957a471/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/62f940ccbbd7cb7239f4493f4c364fd9/transformed/gifdecoder-4.16.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.16.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/62f940ccbbd7cb7239f4493f4c364fd9/transformed/gifdecoder-4.16.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7a50d8a1a7f5c7e95f86f1531967a8fc/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/7a50d8a1a7f5c7e95f86f1531967a8fc/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cd027d887267f0fcbf0ee30ab6f5467a/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/cd027d887267f0fcbf0ee30ab6f5467a/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/235cc6c91c4c943af284e4ca99cfffa8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/235cc6c91c4c943af284e4ca99cfffa8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fa633160b2730208a672245498790388/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/fa633160b2730208a672245498790388/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/011490ab10936165ed620ce1b841ed61/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/011490ab10936165ed620ce1b841ed61/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/231a6d146b315ee23c6aefa7816a3fdc/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/231a6d146b315ee23c6aefa7816a3fdc/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e28b9057842d90c439866a07bbdc55bf/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/e28b9057842d90c439866a07bbdc55bf/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/407de8285299b22372db7baaefd6b19e/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/407de8285299b22372db7baaefd6b19e/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [com.microsoft.onnxruntime:onnxruntime-android:1.20.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/255ed396a15a4d91ade99ac537368739/transformed/onnxruntime-android-1.20.0/AndroidManifest.xml:5:5-44
+MERGED from [com.microsoft.onnxruntime:onnxruntime-android:1.20.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/255ed396a15a4d91ade99ac537368739/transformed/onnxruntime-android-1.20.0/AndroidManifest.xml:5:5-44
+	android:targetSdkVersion
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /run/media/parasaran/Dev/Code/AndroidStudioProjects/RealESRGANUpscaler/app/src/main/AndroidManifest.xml
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/950d6c0a9154e3abdb70fb4d80989f89/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/618d04492a42dc5442298b3bf153c674/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+permission#com.pv.realesrgan.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+uses-permission#com.pv.realesrgan.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/0123564f995ff248740c159c88d28d77/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/54b3b9ee31df285d5e558098b919239e/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /run/media/parasaran/Parasaran/ProgramData/.gradle/caches/9.1.0/transforms/a92c6b4d4ffe371ad1ebba184876a884/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Real-ESRGAN Upscaler</string>
+    <string name="app_tagline">On-Device AI Super-Resolution (NPU / GPU / CPU)</string>
+    <string name="pick_image">Select Image</string>
+    <string name="change_image">Change Image</string>
+    <string name="upscale_action">Upscale 4x (AI)</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="save_action">Save HD Image</string>
+    <string name="share_action">Share</string>
+    <string name="model_title">Model Architecture</string>
+    <string name="hardware_title">Hardware Acceleration</string>
+    <string name="tile_title">Tile Size</string>
+    <string name="status_ready">Ready. Select an image to upscale.</string>
+    <string name="status_processing">Processing tiles with Real-ESRGAN...</string>
+    <string name="status_success">Upscaling completed successfully!</string>
+    <string name="status_failed">Upscaling failed.</string>
+    <string name="status_cancelled">Upscaling cancelled.</string>
+    <string name="before_label">Original</string>
+    <string name="after_label">Upscaled (4x)</string>
+</resources>

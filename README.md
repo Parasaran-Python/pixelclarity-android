@@ -1,0 +1,100 @@
+# Real-ESRGAN Image Upscaler (Android)
+
+A high-performance Android application for on-device **4x AI Super-Resolution Image Enhancement** using **Real-ESRGAN** deep learning models with **ONNX Runtime**, supporting hardware acceleration across **NPU (Hexagon / MediaTek / Google Tensor)**, **GPU**, and **multi-threaded CPU**.
+
+---
+
+## ✨ Features
+
+- ⚡ **On-Device Local Inference**: 100% offline, zero cloud dependencies, private and fast.
+- 🧠 **Hardware Acceleration**:
+  - **NPU / NNAPI**: Leverages dedicated mobile Neural Processing Units (Qualcomm Hexagon, MediaTek NeuroPilot, Google Tensor TPU).
+  - **Auto**: Intelligently selects the fastest available hardware delegate.
+  - **CPU**: Multi-threaded execution with ARM NEON / XNNPACK optimizations.
+- 🧩 **Seam-Free Tiling Engine**:
+  - Implements overlapping padded tile inference (`128x128` or `256x256` with `10px` border padding) to eliminate seam artifacts and prevent `OutOfMemoryError` on large images.
+- 🎚️ **Interactive Before/After Slider**:
+  - Real-time touch split slider allowing users to inspect original vs 4x enhanced razor-sharp details.
+- 📦 **Multiple Pre-Loaded Models**:
+  - **Real-ESRGAN x4+**: 23 Residual-in-Residual Dense Blocks (RRDB) for photographic fidelity and intricate textures.
+  - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art.
+- 💾 **Native Android MediaStore Integration**:
+  - Save directly to Gallery (`Pictures/RealESRGAN`) with scoped storage support and instant system sharing.
+
+---
+
+## 🏗️ Architecture
+
+```
+RealESRGANUpscaler/
+├── app/
+│   ├── src/main/
+│   │   ├── assets/models/
+│   │   │   ├── realesrgan_x4plus.onnx    # 23 RRDB block model (68.6 MB)
+│   │   │   └── realesrgan_anime_6b.onnx   # 6 RRDB block model (18.3 MB)
+│   │   ├── java/com/pv/realesrgan/
+│   │   │   ├── ml/
+│   │   │   │   ├── HardwareDelegate.kt        # Auto, NPU/NNAPI, CPU selectors
+│   │   │   │   ├── ModelArchitecture.kt       # Model configurations & metadata
+│   │   │   │   ├── RealESRGANUpscalerEngine.kt # Tiled ONNX Runtime inference engine
+│   │   │   │   └── UpscaleConfig.kt           # Parameter encapsulation
+│   │   │   ├── ui/
+│   │   │   │   ├── BeforeAfterSliderView.kt   # Custom interactive split-view
+│   │   │   │   └── MainActivity.kt            # App controller & UI coordinator
+│   │   │   └── utils/
+│   │   │       └── ImageUtils.kt              # EXIF rotation, MediaStore & caching
+│   │   └── res/
+│   │       ├── layout/activity_main.xml
+│   │       └── values/ (colors, strings, themes)
+│   └── build.gradle.kts
+└── settings.gradle.kts
+```
+
+---
+
+## 🚀 How to Build and Run
+
+### Prerequisites
+- Android SDK (API Level 26–35)
+- JDK 17 or 21
+- Android Studio Ladybug / Koala or CLI Gradle
+
+### Command-Line Build
+```bash
+./gradlew assembleDebug
+```
+The generated APK will be at:
+`app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+## 🧪 Exporting Custom PyTorch Models to ONNX
+
+To export another ESRGAN or custom super-resolution model from PyTorch `.pth` checkpoint to ONNX:
+
+```python
+import torch
+import onnx
+from upscale import RRDBNet
+
+model = RRDBNet(in_nc=3, out_nc=3, nf=64, nb=23, gc=32)
+state_dict = torch.load("RealESRGAN_x4plus.pth", map_location="cpu")
+keyname = "params_ema" if "params_ema" in state_dict else "params"
+model.load_state_dict(state_dict.get(keyname, state_dict))
+model.eval()
+
+dummy_input = torch.randn(1, 3, 256, 256)
+dynamic_axes = {"input": {0: "batch", 2: "height", 3: "width"}, "output": {0: "batch", 2: "out_height", 3: "out_width"}}
+
+torch.onnx.export(
+    model,
+    dummy_input,
+    "realesrgan_custom.onnx",
+    export_params=True,
+    opset_version=18,
+    do_constant_folding=True,
+    input_names=["input"],
+    output_names=["output"],
+    dynamic_axes=dynamic_axes
+)
+```
