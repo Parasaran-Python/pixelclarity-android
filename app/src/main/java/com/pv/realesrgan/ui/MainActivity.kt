@@ -1,5 +1,7 @@
 package com.pv.realesrgan.ui
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -7,11 +9,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.pv.realesrgan.R
 import com.pv.realesrgan.databinding.ActivityMainBinding
+import com.pv.realesrgan.databinding.DialogLoadUrlBinding
 import com.pv.realesrgan.ml.HardwareDelegate
 import com.pv.realesrgan.ml.ModelArchitecture
 import com.pv.realesrgan.ml.RealESRGANUpscalerEngine
@@ -54,12 +59,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        val pickAction = View.OnClickListener {
+        binding.btnPickImageEmpty.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
 
-        binding.btnPickImageEmpty.setOnClickListener(pickAction)
-        binding.btnChangeImage.setOnClickListener(pickAction)
+        binding.btnLoadUrlEmpty.setOnClickListener {
+            showLoadUrlDialog()
+        }
+
+        binding.btnLoadUrlTop.setOnClickListener {
+            showLoadUrlDialog()
+        }
+
+        binding.btnChangeImage.setOnClickListener {
+            showImageSourceChooser()
+        }
 
         binding.chipGroupScale.setOnCheckedStateChangeListener { _, _ ->
             updateResolutionInfo()
@@ -77,8 +91,120 @@ class MainActivity : AppCompatActivity() {
             saveUpscaledImage()
         }
 
+        binding.btnShare.setOnClickListener {
+            shareUpscaledImage()
+        }
+
         binding.btnAboutCredits.setOnClickListener {
             showAboutCreditsDialog()
+        }
+    }
+
+    private fun showImageSourceChooser() {
+        val options = arrayOf(
+            getString(R.string.source_gallery),
+            getString(R.string.source_url)
+        )
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.select_source_title))
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> pickImageLauncher.launch("image/*")
+                    1 -> showLoadUrlDialog()
+                }
+            }
+            .show()
+    }
+
+    private fun showLoadUrlDialog() {
+        val dialogBinding = DialogLoadUrlBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.dialog_url_title))
+            .setView(dialogBinding.root)
+            .setPositiveButton(getString(R.string.dialog_action_load), null)
+            .setNegativeButton(getString(R.string.dialog_action_cancel), null)
+            .create()
+
+        dialog.setOnShowListener {
+            val loadButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            loadButton.setOnClickListener {
+                val inputUrl = dialogBinding.etImageUrl.text?.toString()?.trim().orEmpty()
+                if (inputUrl.isEmpty()) {
+                    dialogBinding.tilImageUrl.error = getString(R.string.error_empty_url)
+                    return@setOnClickListener
+                }
+                if (!inputUrl.startsWith("http://", ignoreCase = true) && !inputUrl.startsWith("https://", ignoreCase = true)) {
+                    dialogBinding.tilImageUrl.error = getString(R.string.error_invalid_url)
+                    return@setOnClickListener
+                }
+                dialogBinding.tilImageUrl.error = null
+                dialog.dismiss()
+                loadImageFromUrl(inputUrl)
+            }
+        }
+
+        // Quick sample chips for 1-click loading & testing
+        dialogBinding.chipSamplePhoto.setOnClickListener {
+            dialogBinding.etImageUrl.setText("https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/0014.jpg")
+            dialogBinding.tilImageUrl.error = null
+        }
+
+        dialogBinding.chipSampleAnime.setOnClickListener {
+            dialogBinding.etImageUrl.setText("https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/comic_input1.png")
+            dialogBinding.tilImageUrl.error = null
+        }
+
+        dialogBinding.chipPasteClipboard.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            val clipData = clipboard?.primaryClip
+            val text = clipData?.getItemAt(0)?.text?.toString()?.trim()
+            if (!text.isNullOrEmpty() && (text.startsWith("http://", ignoreCase = true) || text.startsWith("https://", ignoreCase = true))) {
+                dialogBinding.etImageUrl.setText(text)
+                dialogBinding.tilImageUrl.error = null
+            } else {
+                Toast.makeText(this, getString(R.string.toast_clipboard_empty), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun loadImageFromUrl(url: String) {
+        binding.tvStatus.text = getString(R.string.status_downloading_url)
+        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.isIndeterminate = true
+        updateUiState(isProcessing = true)
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val result = ImageUtils.loadBitmapFromUrl(url)
+            updateUiState(isProcessing = false)
+            binding.progressBar.isIndeterminate = false
+            binding.progressBar.visibility = View.GONE
+
+            result.onSuccess { bitmap ->
+                originalBitmap?.recycle()
+                upscaledBitmap?.recycle()
+                originalBitmap = bitmap
+                upscaledBitmap = null
+
+                binding.emptyStateView.visibility = View.GONE
+                binding.sliderView.visibility = View.VISIBLE
+                binding.sliderView.setBitmaps(bitmap, null)
+
+                updateResolutionInfo()
+
+                val scaleInt = getSelectedScaleMultiplier().toInt()
+                binding.layoutSaveShare.visibility = View.GONE
+                binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
+            }.onFailure { exception ->
+                val errorMsg = exception.localizedMessage ?: exception.message ?: "Network error"
+                binding.tvStatus.text = getString(R.string.status_error, errorMsg)
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.toast_load_failed, errorMsg),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
@@ -118,7 +244,7 @@ class MainActivity : AppCompatActivity() {
             • Acceleration: Android NNAPI / Qualcomm Hexagon NPU / ARM NEON
         """.trimIndent()
 
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle("Credits & Attribution")
             .setMessage(creditsMessage)
             .setPositiveButton("Open GitHub") { _, _ ->
@@ -150,7 +276,7 @@ class MainActivity : AppCompatActivity() {
                     binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
                     binding.progressBar.visibility = View.GONE
                 } else {
-                    Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed, "Could not open selected image"), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -301,6 +427,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateUiState(isProcessing: Boolean) {
         binding.btnUpscale.isEnabled = !isProcessing
         binding.btnChangeImage.isEnabled = !isProcessing
+        binding.btnLoadUrlTop.isEnabled = !isProcessing
         binding.chipGroupModel.isEnabled = !isProcessing
         binding.chipGroupScale.isEnabled = !isProcessing
         binding.chipGroupHardware.isEnabled = !isProcessing

@@ -24,8 +24,10 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
 - 📦 **Multiple Pre-Loaded Models**:
   - **Real-ESRGAN x4+**: 23 Residual-in-Residual Dense Blocks (RRDB) for photographic fidelity and intricate textures.
   - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art.
-- 💾 **Native Android MediaStore Integration**:
-  - Save directly to Gallery (`Pictures/RealESRGAN`) with scoped storage support and instant system sharing.
+- 🌐 **Flexible Image Input (Gallery & URL)**:
+  - Select photos from local device storage or directly download images from any web URL (HTTP/HTTPS) with 1-click sample presets and clipboard auto-paste.
+- 💾 **Save & Instant Sharing**:
+  - Save full-resolution enhanced PNGs directly to device Gallery (`Pictures/RealESRGAN`) with MediaStore scoped storage, or share directly to other apps via the Android Share Sheet.
 - 🚀 **16 KB Page Size Compatible**:
   - Fully compliant with Android 15+ 16 KB memory page size requirements, with 16 KB ELF-aligned native binaries and uncompressed zip packaging for maximum speed and zero compatibility warnings.
 
