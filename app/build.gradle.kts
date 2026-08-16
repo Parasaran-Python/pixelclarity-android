@@ -43,6 +43,12 @@ android {
         viewBinding = true
     }
 
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
     androidResources {
         noCompress.addAll(listOf("onnx", "ort", "bin", "param"))
     }
