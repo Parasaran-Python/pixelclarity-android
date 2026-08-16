@@ -16,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.pv.realesrgan.R
 import com.pv.realesrgan.databinding.ActivityMainBinding
+import com.pv.realesrgan.databinding.DialogFullscreenPreviewBinding
 import com.pv.realesrgan.databinding.DialogLoadUrlBinding
 import com.pv.realesrgan.ml.HardwareDelegate
 import com.pv.realesrgan.ml.ModelArchitecture
@@ -75,8 +76,32 @@ class MainActivity : AppCompatActivity() {
             showImageSourceChooser()
         }
 
-        binding.chipGroupScale.setOnCheckedStateChangeListener { _, _ ->
+        binding.btnInspectFullscreen.setOnClickListener {
+            showFullscreenPreviewDialog()
+        }
+
+        binding.chipGroupScale.setOnCheckedStateChangeListener { _, checkedIds ->
+            val isCustom = checkedIds.contains(R.id.chipScaleCustom)
+            binding.layoutCustomScale.visibility = if (isCustom) View.VISIBLE else View.GONE
             updateResolutionInfo()
+        }
+
+        binding.sliderCustomScale.addOnChangeListener { _, value, _ ->
+            binding.tvCustomScaleValue.text = getScaleDisplayString(value)
+            updateResolutionInfo()
+        }
+
+        binding.chipPreset15x.setOnClickListener {
+            binding.sliderCustomScale.value = 1.5f
+        }
+        binding.chipPreset3x.setOnClickListener {
+            binding.sliderCustomScale.value = 3.0f
+        }
+        binding.chipPreset5x.setOnClickListener {
+            binding.sliderCustomScale.value = 5.0f
+        }
+        binding.chipPreset8x.setOnClickListener {
+            binding.sliderCustomScale.value = 8.0f
         }
 
         binding.btnUpscale.setOnClickListener {
@@ -93,6 +118,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnShare.setOnClickListener {
             shareUpscaledImage()
+        }
+
+        binding.btnInspect.setOnClickListener {
+            showFullscreenPreviewDialog()
         }
 
         binding.btnAboutCredits.setOnClickListener {
@@ -189,13 +218,14 @@ class MainActivity : AppCompatActivity() {
 
                 binding.emptyStateView.visibility = View.GONE
                 binding.sliderView.visibility = View.VISIBLE
+                binding.btnInspectFullscreen.visibility = View.VISIBLE
                 binding.sliderView.setBitmaps(bitmap, null)
 
                 updateResolutionInfo()
 
-                val scaleInt = getSelectedScaleMultiplier().toInt()
+                val scaleStr = getScaleDisplayString(getSelectedScaleMultiplier())
                 binding.layoutSaveShare.visibility = View.GONE
-                binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
+                binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleStr)
             }.onFailure { exception ->
                 val errorMsg = exception.localizedMessage ?: exception.message ?: "Network error"
                 binding.tvStatus.text = getString(R.string.status_error, errorMsg)
@@ -209,7 +239,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getSelectedScaleMultiplier(): Float {
-        return if (binding.chipScale2x.isChecked) 2.0f else 4.0f
+        return when {
+            binding.chipScaleCustom.isChecked -> binding.sliderCustomScale.value
+            binding.chipScale2x.isChecked -> 2.0f
+            else -> 4.0f
+        }
+    }
+
+    private fun getScaleDisplayString(scale: Float): String {
+        return if (scale % 1.0f == 0f) "${scale.toInt()}x" else String.format("%.1fx", scale)
     }
 
     private fun updateResolutionInfo() {
@@ -217,14 +255,56 @@ class MainActivity : AppCompatActivity() {
         val inW = bitmap.width
         val inH = bitmap.height
         val scale = getSelectedScaleMultiplier()
-        val scaleInt = scale.toInt()
+        val scaleStr = getScaleDisplayString(scale)
         val outW = (inW * scale).roundToInt()
         val outH = (inH * scale).roundToInt()
 
         binding.cardResolutionInfo.visibility = View.VISIBLE
         binding.tvResolutionInput.text = getString(R.string.resolution_input, inW, inH)
-        binding.tvResolutionOutput.text = getString(R.string.resolution_output, scaleInt, outW, outH)
-        binding.btnUpscale.text = getString(R.string.upscale_button_action, scaleInt)
+        binding.tvResolutionOutput.text = getString(R.string.resolution_output, scaleStr, outW, outH)
+        binding.btnUpscale.text = getString(R.string.upscale_button_action, scaleStr)
+    }
+
+    private fun showFullscreenPreviewDialog() {
+        val before = originalBitmap ?: return
+        val after = upscaledBitmap
+        val scale = getSelectedScaleMultiplier()
+        val scaleStr = getScaleDisplayString(scale)
+
+        val dialogBinding = DialogFullscreenPreviewBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+            .setView(dialogBinding.root)
+            .create()
+
+        val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
+        dialogBinding.fullscreenSliderView.setBitmaps(before, after, badgeLabel)
+
+        dialogBinding.tvFullscreenTitle.text = if (after != null) {
+            getString(R.string.resolution_output, scaleStr, after.width, after.height)
+        } else {
+            getString(R.string.resolution_input, before.width, before.height)
+        }
+
+        dialogBinding.btnCloseFullscreen.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.btnFullscreenResetZoom.setOnClickListener {
+            dialogBinding.fullscreenSliderView.resetZoom()
+        }
+
+        dialogBinding.btnFullscreenShare.visibility = if (after != null) View.VISIBLE else View.GONE
+        dialogBinding.btnFullscreenSave.visibility = if (after != null) View.VISIBLE else View.GONE
+
+        dialogBinding.btnFullscreenShare.setOnClickListener {
+            shareUpscaledImage()
+        }
+
+        dialogBinding.btnFullscreenSave.setOnClickListener {
+            saveUpscaledImage()
+        }
+
+        dialog.show()
     }
 
     private fun showAboutCreditsDialog() {
@@ -267,13 +347,14 @@ class MainActivity : AppCompatActivity() {
 
                     binding.emptyStateView.visibility = View.GONE
                     binding.sliderView.visibility = View.VISIBLE
+                    binding.btnInspectFullscreen.visibility = View.VISIBLE
                     binding.sliderView.setBitmaps(bitmap, null)
 
                     updateResolutionInfo()
 
-                    val scaleInt = getSelectedScaleMultiplier().toInt()
+                    val scaleStr = getScaleDisplayString(getSelectedScaleMultiplier())
                     binding.layoutSaveShare.visibility = View.GONE
-                    binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
+                    binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleStr)
                     binding.progressBar.visibility = View.GONE
                 } else {
                     Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed, "Could not open selected image"), Toast.LENGTH_SHORT).show()
@@ -303,7 +384,7 @@ class MainActivity : AppCompatActivity() {
 
         val tileSize = if (binding.chipTile128.isChecked) 128 else 256
         val selectedScale = getSelectedScaleMultiplier()
-        val scaleInt = selectedScale.toInt()
+        val scaleStr = getScaleDisplayString(selectedScale)
 
         val config = UpscaleConfig(
             model = selectedModel,
@@ -352,11 +433,12 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     upscaledBitmap?.recycle()
                     upscaledBitmap = result
-                    val badgeLabel = getString(R.string.slider_badge_upscaled, scaleInt)
+                    val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
                     binding.sliderView.setBitmaps(originalBitmap, result, badgeLabel)
-                    binding.tvStatus.text = getString(R.string.status_complete, scaleInt)
+                    binding.tvStatus.text = getString(R.string.status_complete, scaleStr)
                     updateUiState(isProcessing = false)
                     binding.layoutSaveShare.visibility = View.VISIBLE
+                    binding.btnInspectFullscreen.visibility = View.VISIBLE
                 }
             } catch (e: CancellationException) {
                 withContext(Dispatchers.Main) {
@@ -428,10 +510,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnUpscale.isEnabled = !isProcessing
         binding.btnChangeImage.isEnabled = !isProcessing
         binding.btnLoadUrlTop.isEnabled = !isProcessing
+        binding.btnInspectFullscreen.isEnabled = !isProcessing
         binding.chipGroupModel.isEnabled = !isProcessing
         binding.chipGroupScale.isEnabled = !isProcessing
         binding.chipGroupHardware.isEnabled = !isProcessing
         binding.chipGroupTileSize.isEnabled = !isProcessing
+        binding.sliderCustomScale.isEnabled = !isProcessing
 
         for (i in 0 until binding.chipGroupModel.childCount) {
             binding.chipGroupModel.getChildAt(i).isEnabled = !isProcessing
@@ -444,6 +528,9 @@ class MainActivity : AppCompatActivity() {
         }
         for (i in 0 until binding.chipGroupTileSize.childCount) {
             binding.chipGroupTileSize.getChildAt(i).isEnabled = !isProcessing
+        }
+        for (i in 0 until binding.chipGroupCustomPresets.childCount) {
+            binding.chipGroupCustomPresets.getChildAt(i).isEnabled = !isProcessing
         }
 
         binding.btnCancel.visibility = if (isProcessing) View.VISIBLE else View.GONE

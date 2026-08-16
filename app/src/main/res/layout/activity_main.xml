@@ -89,6 +89,20 @@
                         android:layout_height="match_parent"
                         android:visibility="gone" />
 
+                    <!-- Inspect Fullscreen Overlay Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnInspectFullscreen"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="12dp"
+                        app:icon="@drawable/ic_fullscreen"
+                        app:iconTint="@color/on_surface"
+                        app:backgroundTint="#990F172A"
+                        android:visibility="gone"
+                        android:contentDescription="@string/desc_inspect_fullscreen" />
+
                     <!-- Empty State Placeholder -->
                     <LinearLayout
                         android:id="@+id/emptyStateView"
@@ -293,7 +307,111 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/scale_2x" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipScaleCustom"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipIcon="@drawable/ic_tune"
+                            app:chipIconTint="@color/accent_glow"
+                            android:text="@string/scale_custom" />
                     </com.google.android.material.chip.ChipGroup>
+
+                    <!-- Expandable Custom Scale Controls -->
+                    <LinearLayout
+                        android:id="@+id/layoutCustomScale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_custom_scale_card"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/custom_scale_multiplier_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvCustomScaleValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3.0x"
+                                android:textColor="@color/accent_glow"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <com.google.android.material.slider.Slider
+                            android:id="@+id/sliderCustomScale"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:valueFrom="1.0"
+                            android:valueTo="8.0"
+                            android:stepSize="0.5"
+                            android:value="3.0"
+                            app:thumbColor="@color/accent_glow"
+                            app:trackColorActive="@color/primary"
+                            app:trackColorInactive="@color/surface_variant" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupCustomPresets"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset15x"
+                                style="@style/Widget.Material3.Chip.Assist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1.5x"
+                                android:textColor="@color/on_surface"
+                                app:chipBackgroundColor="@color/surface_variant"
+                                app:chipStrokeColor="@color/divider" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset3x"
+                                style="@style/Widget.Material3.Chip.Assist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3.0x"
+                                android:textColor="@color/on_surface"
+                                app:chipBackgroundColor="@color/surface_variant"
+                                app:chipStrokeColor="@color/divider" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset5x"
+                                style="@style/Widget.Material3.Chip.Assist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="5.0x"
+                                android:textColor="@color/on_surface"
+                                app:chipBackgroundColor="@color/surface_variant"
+                                app:chipStrokeColor="@color/divider" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset8x"
+                                style="@style/Widget.Material3.Chip.Assist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="8.0x"
+                                android:textColor="@color/on_surface"
+                                app:chipBackgroundColor="@color/surface_variant"
+                                app:chipStrokeColor="@color/divider" />
+                        </com.google.android.material.chip.ChipGroup>
+                    </LinearLayout>
 
                     <!-- Hardware Delegate -->
                     <TextView
@@ -456,7 +574,7 @@
                         android:layout_marginStart="8dp" />
                 </LinearLayout>
 
-                <!-- Save & Share Buttons (Displayed after completion) -->
+                <!-- Save & Share & Inspect Buttons (Displayed after completion) -->
                 <LinearLayout
                     android:id="@+id/layoutSaveShare"
                     android:layout_width="match_parent"
@@ -474,16 +592,31 @@
                         app:icon="@drawable/ic_save"
                         app:cornerRadius="12dp"
                         app:backgroundTint="@color/secondary"
-                        android:layout_marginEnd="8dp" />
+                        android:layout_marginEnd="6dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnShare"
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="0dp"
                         android:layout_height="52dp"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.85"
                         android:text="@string/share_action"
                         app:icon="@drawable/ic_share"
+                        app:cornerRadius="12dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnInspect"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="0.95"
+                        android:text="@string/inspect_action"
+                        app:icon="@drawable/ic_fullscreen"
+                        app:iconTint="@color/accent_glow"
+                        android:textColor="@color/on_surface"
+                        app:strokeColor="@color/surface_variant"
+                        app:strokeWidth="1dp"
                         app:cornerRadius="12dp" />
                 </LinearLayout>
             </LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Interactive Zoomable Slider in Fullscreen -->
+    <com.pv.realesrgan.ui.BeforeAfterSliderView
+        android:id="@+id/fullscreenSliderView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Top Overlay Bar -->
+    <LinearLayout
+        android:id="@+id/topBarOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="#990F172A"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCloseFullscreen"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:icon="@drawable/ic_close"
+            app:iconTint="@color/on_surface"
+            android:contentDescription="@string/dialog_action_cancel" />
+
+        <TextView
+            android:id="@+id/tvFullscreenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/inspect_fullscreen_title"
+            android:textColor="@color/on_surface"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFullscreenResetZoom"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:icon="@drawable/ic_zoom_in"
+            app:iconTint="@color/accent_glow"
+            android:contentDescription="@string/desc_reset_zoom" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFullscreenShare"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:icon="@drawable/ic_share"
+            app:iconTint="@color/on_surface"
+            android:contentDescription="@string/share_action" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFullscreenSave"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:icon="@drawable/ic_save"
+            app:iconTint="@color/on_surface"
+            android:contentDescription="@string/save_action" />
+    </LinearLayout>
+
+    <!-- Bottom Hint Overlay -->
+    <LinearLayout
+        android:id="@+id/bottomBarOverlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_bottom_hint"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvFullscreenHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inspect_zoom_hint"
+            android:textColor="@color/on_surface"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
