@@ -1,17 +1,34 @@
 package com.pv.realesrgan.ui
 
+import android.app.Dialog
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
+import java.util.Locale
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.pv.realesrgan.R
 import com.pv.realesrgan.databinding.ActivityMainBinding
+import com.pv.realesrgan.databinding.DialogFullscreenPreviewBinding
+import com.pv.realesrgan.databinding.DialogLoadUrlBinding
 import com.pv.realesrgan.ml.HardwareDelegate
 import com.pv.realesrgan.ml.ModelArchitecture
 import com.pv.realesrgan.ml.RealESRGANUpscalerEngine
@@ -54,15 +71,48 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        val pickAction = View.OnClickListener {
+        binding.btnPickImageEmpty.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
 
-        binding.btnPickImageEmpty.setOnClickListener(pickAction)
-        binding.btnChangeImage.setOnClickListener(pickAction)
+        binding.btnLoadUrlEmpty.setOnClickListener {
+            showLoadUrlDialog()
+        }
 
-        binding.chipGroupScale.setOnCheckedStateChangeListener { _, _ ->
+        binding.btnLoadUrlTop.setOnClickListener {
+            showLoadUrlDialog()
+        }
+
+        binding.btnChangeImage.setOnClickListener {
+            showImageSourceChooser()
+        }
+
+        binding.btnInspectFullscreen.setOnClickListener {
+            showFullscreenPreviewDialog()
+        }
+
+        binding.chipGroupScale.setOnCheckedStateChangeListener { _, checkedIds ->
+            val isCustom = checkedIds.contains(R.id.chipScaleCustom)
+            binding.layoutCustomScale.visibility = if (isCustom) View.VISIBLE else View.GONE
             updateResolutionInfo()
+        }
+
+        binding.sliderCustomScale.addOnChangeListener { _, value, _ ->
+            binding.tvCustomScaleValue.text = getScaleDisplayString(value)
+            updateResolutionInfo()
+        }
+
+        binding.chipPreset15x.setOnClickListener {
+            binding.sliderCustomScale.value = 1.5f
+        }
+        binding.chipPreset3x.setOnClickListener {
+            binding.sliderCustomScale.value = 3.0f
+        }
+        binding.chipPreset5x.setOnClickListener {
+            binding.sliderCustomScale.value = 5.0f
+        }
+        binding.chipPreset8x.setOnClickListener {
+            binding.sliderCustomScale.value = 8.0f
         }
 
         binding.btnUpscale.setOnClickListener {
@@ -77,13 +127,138 @@ class MainActivity : AppCompatActivity() {
             saveUpscaledImage()
         }
 
+        binding.btnShare.setOnClickListener {
+            shareUpscaledImage()
+        }
+
+        binding.btnInspect.setOnClickListener {
+            showFullscreenPreviewDialog()
+        }
+
         binding.btnAboutCredits.setOnClickListener {
             showAboutCreditsDialog()
         }
     }
 
+    private fun showImageSourceChooser() {
+        val options = arrayOf(
+            getString(R.string.source_gallery),
+            getString(R.string.source_url)
+        )
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.select_source_title))
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> pickImageLauncher.launch("image/*")
+                    1 -> showLoadUrlDialog()
+                }
+            }
+            .show()
+    }
+
+    private fun showLoadUrlDialog() {
+        val dialogBinding = DialogLoadUrlBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.dialog_url_title))
+            .setView(dialogBinding.root)
+            .setPositiveButton(getString(R.string.dialog_action_load), null)
+            .setNegativeButton(getString(R.string.dialog_action_cancel), null)
+            .create()
+
+        dialog.setOnShowListener {
+            val loadButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            loadButton.setOnClickListener {
+                val inputUrl = dialogBinding.etImageUrl.text?.toString()?.trim().orEmpty()
+                if (inputUrl.isEmpty()) {
+                    dialogBinding.tilImageUrl.error = getString(R.string.error_empty_url)
+                    return@setOnClickListener
+                }
+                if (!inputUrl.startsWith("http://", ignoreCase = true) && !inputUrl.startsWith("https://", ignoreCase = true)) {
+                    dialogBinding.tilImageUrl.error = getString(R.string.error_invalid_url)
+                    return@setOnClickListener
+                }
+                dialogBinding.tilImageUrl.error = null
+                dialog.dismiss()
+                loadImageFromUrl(inputUrl)
+            }
+        }
+
+        // Quick sample chips for 1-click loading & testing
+        dialogBinding.chipSamplePhoto.setOnClickListener {
+            dialogBinding.etImageUrl.setText(getString(R.string.sample_photo_url))
+            dialogBinding.tilImageUrl.error = null
+        }
+
+        dialogBinding.chipSampleAnime.setOnClickListener {
+            dialogBinding.etImageUrl.setText(getString(R.string.sample_anime_url))
+            dialogBinding.tilImageUrl.error = null
+        }
+
+        dialogBinding.chipPasteClipboard.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            val clipData = clipboard?.primaryClip
+            val text = clipData?.getItemAt(0)?.text?.toString()?.trim()
+            if (!text.isNullOrEmpty() && (text.startsWith("http://", ignoreCase = true) || text.startsWith("https://", ignoreCase = true))) {
+                dialogBinding.etImageUrl.setText(text)
+                dialogBinding.tilImageUrl.error = null
+            } else {
+                Toast.makeText(this, getString(R.string.toast_clipboard_empty), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun loadImageFromUrl(url: String) {
+        binding.tvStatus.text = getString(R.string.status_downloading_url)
+        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.isIndeterminate = true
+        updateUiState(isProcessing = true)
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val result = ImageUtils.loadBitmapFromUrl(url)
+            updateUiState(isProcessing = false)
+            binding.progressBar.isIndeterminate = false
+            binding.progressBar.visibility = View.GONE
+
+            result.onSuccess { bitmap ->
+                originalBitmap?.recycle()
+                upscaledBitmap?.recycle()
+                originalBitmap = bitmap
+                upscaledBitmap = null
+
+                binding.emptyStateView.visibility = View.GONE
+                binding.sliderView.visibility = View.VISIBLE
+                binding.btnInspectFullscreen.visibility = View.VISIBLE
+                binding.sliderView.setBitmaps(bitmap, null)
+
+                updateResolutionInfo()
+
+                val scaleStr = getScaleDisplayString(getSelectedScaleMultiplier())
+                binding.layoutSaveShare.visibility = View.GONE
+                binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleStr)
+            }.onFailure { exception ->
+                val errorMsg = exception.localizedMessage ?: exception.message ?: "Network error"
+                binding.tvStatus.text = getString(R.string.status_error, errorMsg)
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.toast_load_failed, errorMsg),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
     private fun getSelectedScaleMultiplier(): Float {
-        return if (binding.chipScale2x.isChecked) 2.0f else 4.0f
+        return when {
+            binding.chipScaleCustom.isChecked -> binding.sliderCustomScale.value
+            binding.chipScale2x.isChecked -> 2.0f
+            else -> 4.0f
+        }
+    }
+
+    private fun getScaleDisplayString(scale: Float): String {
+        return if (scale % 1.0f == 0f) "${scale.toInt()}x" else String.format(Locale.US, "%.1fx", scale)
     }
 
     private fun updateResolutionInfo() {
@@ -91,14 +266,112 @@ class MainActivity : AppCompatActivity() {
         val inW = bitmap.width
         val inH = bitmap.height
         val scale = getSelectedScaleMultiplier()
-        val scaleInt = scale.toInt()
+        val scaleStr = getScaleDisplayString(scale)
         val outW = (inW * scale).roundToInt()
         val outH = (inH * scale).roundToInt()
 
         binding.cardResolutionInfo.visibility = View.VISIBLE
         binding.tvResolutionInput.text = getString(R.string.resolution_input, inW, inH)
-        binding.tvResolutionOutput.text = getString(R.string.resolution_output, scaleInt, outW, outH)
-        binding.btnUpscale.text = getString(R.string.upscale_button_action, scaleInt)
+        binding.tvResolutionOutput.text = getString(R.string.resolution_output, scaleStr, outW, outH)
+        binding.btnUpscale.text = getString(R.string.upscale_button_action, scaleStr)
+    }
+
+    private fun showFullscreenPreviewDialog() {
+        val before = originalBitmap ?: return
+        val after = upscaledBitmap
+        val scale = getSelectedScaleMultiplier()
+        val scaleStr = getScaleDisplayString(scale)
+
+        val dialogBinding = DialogFullscreenPreviewBinding.inflate(layoutInflater)
+        val dialog = Dialog(this, R.style.Theme_RealESRGAN_FullscreenDialog)
+        dialog.setContentView(dialogBinding.root)
+
+        dialog.window?.apply {
+            setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            setBackgroundDrawable(ContextCompat.getColor(this@MainActivity, R.color.background).toDrawable())
+            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
+            // Setup edge-to-edge immersive mode
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+            val insetsController = WindowCompat.getInsetsController(this, decorView)
+            insetsController.hide(WindowInsetsCompat.Type.systemBars())
+            insetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
+        // Apply insets for top/bottom bars so they avoid notches and system navigation
+        ViewCompat.setOnApplyWindowInsetsListener(dialogBinding.root) { _, insets ->
+            val statusBars = insets.getInsets(
+                WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            val navBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+
+            val density = resources.displayMetrics.density
+            val defaultPaddingH = (16 * density).toInt()
+            val defaultPaddingV = (12 * density).toInt()
+
+            dialogBinding.topBarOverlay.setPadding(
+                defaultPaddingH,
+                statusBars.top + defaultPaddingV,
+                defaultPaddingH,
+                defaultPaddingV
+            )
+
+            (dialogBinding.bottomBarOverlay.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                bottomMargin = navBars.bottom + (28 * density).toInt()
+                dialogBinding.bottomBarOverlay.layoutParams = this
+            }
+
+            // Offset the badges in the slider view below the top bar and above the bottom hint
+            dialogBinding.topBarOverlay.post {
+                dialogBinding.fullscreenSliderView.badgeTopOffset =
+                    dialogBinding.topBarOverlay.height.toFloat() + 8f * density
+                dialogBinding.fullscreenSliderView.badgeBottomOffset =
+                    dialogBinding.bottomBarOverlay.height.toFloat() + 36f * density
+                dialogBinding.fullscreenSliderView.invalidate()
+            }
+
+            insets
+        }
+
+        val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
+        dialogBinding.fullscreenSliderView.setBitmaps(before, after, badgeLabel)
+
+        dialogBinding.tvFullscreenTitle.text = if (after != null) {
+            getString(R.string.resolution_output, scaleStr, after.width, after.height)
+        } else {
+            getString(R.string.resolution_input, before.width, before.height)
+        }
+
+        dialogBinding.btnCloseFullscreen.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.btnFullscreenResetZoom.setOnClickListener {
+            dialogBinding.fullscreenSliderView.resetZoom()
+        }
+
+        dialogBinding.btnFullscreenShare.visibility = if (after != null) View.VISIBLE else View.GONE
+        dialogBinding.btnFullscreenSave.visibility = if (after != null) View.VISIBLE else View.GONE
+
+        dialogBinding.btnFullscreenShare.setOnClickListener {
+            shareUpscaledImage()
+        }
+
+        dialogBinding.btnFullscreenSave.setOnClickListener {
+            saveUpscaledImage()
+        }
+
+        dialog.show()
+
+        // Ensure MATCH_PARENT layout is firmly applied upon showing
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
     }
 
     private fun showAboutCreditsDialog() {
@@ -118,11 +391,11 @@ class MainActivity : AppCompatActivity() {
             • Acceleration: Android NNAPI / Qualcomm Hexagon NPU / ARM NEON
         """.trimIndent()
 
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle("Credits & Attribution")
             .setMessage(creditsMessage)
             .setPositiveButton("Open GitHub") { _, _ ->
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/xinntao/Real-ESRGAN"))
+                val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/xinntao/Real-ESRGAN".toUri())
                 startActivity(browserIntent)
             }
             .setNegativeButton("Close", null)
@@ -141,16 +414,17 @@ class MainActivity : AppCompatActivity() {
 
                     binding.emptyStateView.visibility = View.GONE
                     binding.sliderView.visibility = View.VISIBLE
+                    binding.btnInspectFullscreen.visibility = View.VISIBLE
                     binding.sliderView.setBitmaps(bitmap, null)
 
                     updateResolutionInfo()
 
-                    val scaleInt = getSelectedScaleMultiplier().toInt()
+                    val scaleStr = getScaleDisplayString(getSelectedScaleMultiplier())
                     binding.layoutSaveShare.visibility = View.GONE
-                    binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
+                    binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleStr)
                     binding.progressBar.visibility = View.GONE
                 } else {
-                    Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed, "Could not open selected image"), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -177,7 +451,7 @@ class MainActivity : AppCompatActivity() {
 
         val tileSize = if (binding.chipTile128.isChecked) 128 else 256
         val selectedScale = getSelectedScaleMultiplier()
-        val scaleInt = selectedScale.toInt()
+        val scaleStr = getScaleDisplayString(selectedScale)
 
         val config = UpscaleConfig(
             model = selectedModel,
@@ -203,7 +477,7 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             lifecycleScope.launch(Dispatchers.Main) {
                                 binding.progressBar.progress = progressPercent
-                                val sec = String.format("%.1f", elapsedMs / 1000f)
+                                val sec = String.format(Locale.US, "%.1f", elapsedMs / 1000f)
                                 binding.tvStatus.text = getString(
                                     R.string.status_upscaling_tile,
                                     currentTile,
@@ -226,11 +500,12 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     upscaledBitmap?.recycle()
                     upscaledBitmap = result
-                    val badgeLabel = getString(R.string.slider_badge_upscaled, scaleInt)
+                    val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
                     binding.sliderView.setBitmaps(originalBitmap, result, badgeLabel)
-                    binding.tvStatus.text = getString(R.string.status_complete, scaleInt)
+                    binding.tvStatus.text = getString(R.string.status_complete, scaleStr)
                     updateUiState(isProcessing = false)
                     binding.layoutSaveShare.visibility = View.VISIBLE
+                    binding.btnInspectFullscreen.visibility = View.VISIBLE
                 }
             } catch (e: CancellationException) {
                 withContext(Dispatchers.Main) {
@@ -301,10 +576,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateUiState(isProcessing: Boolean) {
         binding.btnUpscale.isEnabled = !isProcessing
         binding.btnChangeImage.isEnabled = !isProcessing
+        binding.btnLoadUrlTop.isEnabled = !isProcessing
+        binding.btnInspectFullscreen.isEnabled = !isProcessing
         binding.chipGroupModel.isEnabled = !isProcessing
         binding.chipGroupScale.isEnabled = !isProcessing
         binding.chipGroupHardware.isEnabled = !isProcessing
         binding.chipGroupTileSize.isEnabled = !isProcessing
+        binding.sliderCustomScale.isEnabled = !isProcessing
 
         for (i in 0 until binding.chipGroupModel.childCount) {
             binding.chipGroupModel.getChildAt(i).isEnabled = !isProcessing
@@ -317,6 +595,9 @@ class MainActivity : AppCompatActivity() {
         }
         for (i in 0 until binding.chipGroupTileSize.childCount) {
             binding.chipGroupTileSize.getChildAt(i).isEnabled = !isProcessing
+        }
+        for (i in 0 until binding.chipGroupCustomPresets.childCount) {
+            binding.chipGroupCustomPresets.getChildAt(i).isEnabled = !isProcessing
         }
 
         binding.btnCancel.visibility = if (isProcessing) View.VISIBLE else View.GONE

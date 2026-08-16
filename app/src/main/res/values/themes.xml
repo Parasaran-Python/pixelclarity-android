@@ -7,8 +7,57 @@
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondary_variant</item>
         <item name="colorOnSecondary">@color/on_secondary</item>
+        
+        <!-- Dark Surface and Background system colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorSurfaceContainer">@color/surface</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_variant</item>
+        <item name="colorOutline">@color/divider</item>
+        <item name="colorOutlineVariant">@color/surface_variant</item>
+
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:navigationBarColor">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
+
+        <!-- Material Dialog Theme Integration -->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.RealESRGAN.MaterialAlertDialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.RealESRGAN.MaterialAlertDialog</item>
+    </style>
+
+    <style name="ThemeOverlay.RealESRGAN.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorSurfaceContainer">@color/surface</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_variant</item>
+        <item name="colorPrimary">@color/accent_glow</item>
+        <item name="colorOnPrimary">#0F172A</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.RealESRGAN.DialogButton.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.RealESRGAN.DialogButton.Negative</item>
+    </style>
+
+    <style name="Widget.RealESRGAN.DialogButton.Positive" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/accent_glow</item>
+    </style>
+
+    <style name="Widget.RealESRGAN.DialogButton.Negative" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/on_surface_variant</item>
+    </style>
+
+    <!-- Fullscreen Inspector Dialog Theme -->
+    <style name="Theme.RealESRGAN.FullscreenDialog" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>
