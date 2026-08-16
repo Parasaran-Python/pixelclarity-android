@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/run/media/parasaran/Parasaran/ProgramData/.gradle/daemon/9.1.0/com.pv.realesrgan.app-mergeDebugResources-3:/layout/activity_main.xml",
+        "source": "/run/media/parasaran/Parasaran/ProgramData/.gradle/daemon/9.1.0/com.pv.realesrgan.app-main-6:/layout/activity_main.xml"
+    },
+    {
         "merged": "com.pv.realesrgan.app-mergeDebugResources-3:/layout/activity_main.xml",
         "source": "com.pv.realesrgan.app-main-6:/layout/activity_main.xml"
     }

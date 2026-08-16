@@ -3041,6 +3041,7 @@ drawable ic_call_decline_low
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_image_placeholder
+drawable ic_info
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -3232,6 +3233,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnAboutCredits
 id btnCancel
 id btnChangeImage
 id btnPickImageEmpty

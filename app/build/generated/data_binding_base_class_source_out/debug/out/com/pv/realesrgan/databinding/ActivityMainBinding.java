@@ -27,6 +27,9 @@ public final class ActivityMainBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final MaterialButton btnAboutCredits;
+
+  @NonNull
   public final MaterialButton btnCancel;
 
   @NonNull
@@ -102,18 +105,20 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView tvStatus;
 
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnCancel, @NonNull MaterialButton btnChangeImage,
-      @NonNull MaterialButton btnPickImageEmpty, @NonNull MaterialButton btnSave,
-      @NonNull MaterialButton btnShare, @NonNull MaterialButton btnUpscale,
-      @NonNull MaterialCardView cardProgress, @NonNull MaterialCardView cardResolutionInfo,
-      @NonNull ChipGroup chipGroupHardware, @NonNull ChipGroup chipGroupModel,
-      @NonNull ChipGroup chipGroupTileSize, @NonNull Chip chipHwAuto, @NonNull Chip chipHwCpu,
-      @NonNull Chip chipHwNpu, @NonNull Chip chipModelAnime6B, @NonNull Chip chipModelX4Plus,
-      @NonNull Chip chipTile128, @NonNull Chip chipTile256, @NonNull LinearLayout emptyStateView,
+      @NonNull MaterialButton btnAboutCredits, @NonNull MaterialButton btnCancel,
+      @NonNull MaterialButton btnChangeImage, @NonNull MaterialButton btnPickImageEmpty,
+      @NonNull MaterialButton btnSave, @NonNull MaterialButton btnShare,
+      @NonNull MaterialButton btnUpscale, @NonNull MaterialCardView cardProgress,
+      @NonNull MaterialCardView cardResolutionInfo, @NonNull ChipGroup chipGroupHardware,
+      @NonNull ChipGroup chipGroupModel, @NonNull ChipGroup chipGroupTileSize,
+      @NonNull Chip chipHwAuto, @NonNull Chip chipHwCpu, @NonNull Chip chipHwNpu,
+      @NonNull Chip chipModelAnime6B, @NonNull Chip chipModelX4Plus, @NonNull Chip chipTile128,
+      @NonNull Chip chipTile256, @NonNull LinearLayout emptyStateView,
       @NonNull LinearLayout layoutSaveShare, @NonNull LinearProgressIndicator progressBar,
       @NonNull BeforeAfterSliderView sliderView, @NonNull TextView tvResolutionInput,
       @NonNull TextView tvResolutionOutput, @NonNull TextView tvStatus) {
     this.rootView = rootView;
+    this.btnAboutCredits = btnAboutCredits;
     this.btnCancel = btnCancel;
     this.btnChangeImage = btnChangeImage;
     this.btnPickImageEmpty = btnPickImageEmpty;
@@ -168,6 +173,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnAboutCredits;
+      MaterialButton btnAboutCredits = ViewBindings.findChildViewById(rootView, id);
+      if (btnAboutCredits == null) {
+        break missingId;
+      }
+
       id = R.id.btnCancel;
       MaterialButton btnCancel = ViewBindings.findChildViewById(rootView, id);
       if (btnCancel == null) {
@@ -318,12 +329,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, btnCancel, btnChangeImage,
-          btnPickImageEmpty, btnSave, btnShare, btnUpscale, cardProgress, cardResolutionInfo,
-          chipGroupHardware, chipGroupModel, chipGroupTileSize, chipHwAuto, chipHwCpu, chipHwNpu,
-          chipModelAnime6B, chipModelX4Plus, chipTile128, chipTile256, emptyStateView,
-          layoutSaveShare, progressBar, sliderView, tvResolutionInput, tvResolutionOutput,
-          tvStatus);
+      return new ActivityMainBinding((CoordinatorLayout) rootView, btnAboutCredits, btnCancel,
+          btnChangeImage, btnPickImageEmpty, btnSave, btnShare, btnUpscale, cardProgress,
+          cardResolutionInfo, chipGroupHardware, chipGroupModel, chipGroupTileSize, chipHwAuto,
+          chipHwCpu, chipHwNpu, chipModelAnime6B, chipModelX4Plus, chipTile128, chipTile256,
+          emptyStateView, layoutSaveShare, progressBar, sliderView, tvResolutionInput,
+          tvResolutionOutput, tvStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

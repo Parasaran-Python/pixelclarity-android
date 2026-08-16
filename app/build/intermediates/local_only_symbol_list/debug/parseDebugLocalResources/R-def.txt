@@ -21,11 +21,13 @@ color surface_variant
 drawable bg_card_surface
 drawable bg_pill
 drawable ic_image_placeholder
+drawable ic_info
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_save
 drawable ic_share
 drawable ic_sparkle
+id btnAboutCredits
 id btnCancel
 id btnChangeImage
 id btnPickImageEmpty

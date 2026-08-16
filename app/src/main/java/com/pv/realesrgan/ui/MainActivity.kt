@@ -72,9 +72,37 @@ class MainActivity : AppCompatActivity() {
             saveUpscaledImage()
         }
 
-        binding.btnShare.setOnClickListener {
-            shareUpscaledImage()
+        binding.btnAboutCredits.setOnClickListener {
+            showAboutCreditsDialog()
         }
+    }
+
+    private fun showAboutCreditsDialog() {
+        val creditsMessage = """
+            🎨 Real-ESRGAN AI Super-Resolution
+            
+            Based on the pioneering work by Xintao Wang et al.
+            
+            • Paper: "Real-ESRGAN: Training Real-World Blind Super-Resolution with Pure Synthetic Data" (ICCVW 2021)
+            • Authors: Xintao Wang, Liangbin Xie, Chao Dong, Ying Shan
+            • Laboratory: ARC Lab, Tencent PCG & SIAT
+            • Official Repo: github.com/xinntao/Real-ESRGAN
+            • Model License: BSD 3-Clause License
+            
+            ⚙️ On-Device Runtime:
+            • Engine: Microsoft ONNX Runtime Mobile (MIT License)
+            • Acceleration: Android NNAPI / Qualcomm Hexagon NPU / ARM NEON
+        """.trimIndent()
+
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Credits & Attribution")
+            .setMessage(creditsMessage)
+            .setPositiveButton("Open GitHub") { _, _ ->
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/xinntao/Real-ESRGAN"))
+                startActivity(browserIntent)
+            }
+            .setNegativeButton("Close", null)
+            .show()
     }
 
     private fun loadSelectedImage(uri: Uri) {

@@ -98,3 +98,29 @@ torch.onnx.export(
     dynamic_axes=dynamic_axes
 )
 ```
+
+---
+
+## 📜 Credits & Acknowledgments
+
+This application is built upon the breakthrough research and open-source models created by **Xintao Wang** and colleagues at ARC Lab, Tencent PCG, and SIAT:
+
+* **Paper**: [Real-ESRGAN: Training Real-World Blind Super-Resolution with Pure Synthetic Data](https://arxiv.org/abs/2107.10833) (ICCVW 2021)
+* **Authors**: Xintao Wang, Liangbin Xie, Chao Dong, Ying Shan
+* **Official Repository**: [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
+* **Model License**: [BSD 3-Clause License](https://github.com/xinntao/Real-ESRGAN/blob/master/LICENSE)
+
+### BibTeX Citation
+```bibtex
+@inproceedings{wang2021realesrgan,
+    author    = {Xintao Wang and Liangbin Xie and Chao Dong and Ying Shan},
+    title     = {Real-ESRGAN: Training Real-World Blind Super-Resolution with Pure Synthetic Data},
+    booktitle = {International Conference on Computer Vision Workshops (ICCVW)},
+    year      = {2021}
+}
+```
+
+### Additional Libraries & Tooling
+* **[ONNX Runtime Mobile](https://github.com/microsoft/onnxruntime)** (Microsoft) - Licensed under MIT.
+* **[Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan)** (Nihui & Xintao Wang) - Reference for mobile/Vulkan shaders.
+
