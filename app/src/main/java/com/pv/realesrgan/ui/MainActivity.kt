@@ -276,6 +276,23 @@ class MainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .create()
 
+        // Force dialog to fill the entire screen
+        dialog.window?.apply {
+            setLayout(
+                android.view.WindowManager.LayoutParams.MATCH_PARENT,
+                android.view.WindowManager.LayoutParams.MATCH_PARENT
+            )
+            setFlags(
+                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+            decorView.systemUiVisibility = (
+                android.view.View.SYSTEM_UI_FLAG_FULLSCREEN or
+                android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            )
+        }
+
         val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
         dialogBinding.fullscreenSliderView.setBitmaps(before, after, badgeLabel)
 
@@ -305,6 +322,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show()
+
+        // Apply layout AFTER show() so window is created
+        dialog.window?.setLayout(
+            android.view.WindowManager.LayoutParams.MATCH_PARENT,
+            android.view.WindowManager.LayoutParams.MATCH_PARENT
+        )
     }
 
     private fun showAboutCreditsDialog() {

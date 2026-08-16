@@ -71,7 +71,7 @@
             <!-- Image Preview Box / Before-After Slider -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="340dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/surface_variant"
@@ -579,45 +579,55 @@
                     android:id="@+id/layoutSaveShare"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="gone"
                     android:layout_marginTop="12dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSave"
-                        android:layout_width="0dp"
-                        android:layout_height="52dp"
-                        android:layout_weight="1"
-                        android:text="@string/save_action"
-                        app:icon="@drawable/ic_save"
-                        app:cornerRadius="12dp"
-                        app:backgroundTint="@color/secondary"
-                        android:layout_marginEnd="6dp" />
+                    <!-- Row 1: Save + Share -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnShare"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="0dp"
-                        android:layout_height="52dp"
-                        android:layout_weight="0.85"
-                        android:text="@string/share_action"
-                        app:icon="@drawable/ic_share"
-                        app:cornerRadius="12dp"
-                        android:layout_marginEnd="6dp" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSave"
+                            android:layout_width="0dp"
+                            android:layout_height="52dp"
+                            android:layout_weight="1"
+                            android:text="@string/save_action"
+                            app:icon="@drawable/ic_save"
+                            app:iconGravity="textStart"
+                            app:cornerRadius="12dp"
+                            app:backgroundTint="@color/secondary"
+                            android:layout_marginEnd="8dp" />
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnShare"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="52dp"
+                            android:layout_weight="1"
+                            android:text="@string/share_action"
+                            app:icon="@drawable/ic_share"
+                            app:iconGravity="textStart"
+                            app:cornerRadius="12dp" />
+                    </LinearLayout>
+
+                    <!-- Row 2: Inspect & Zoom spanning full width -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnInspect"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="52dp"
-                        android:layout_weight="0.95"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
                         android:text="@string/inspect_action"
                         app:icon="@drawable/ic_fullscreen"
+                        app:iconGravity="textStart"
                         app:iconTint="@color/accent_glow"
-                        android:textColor="@color/on_surface"
-                        app:strokeColor="@color/surface_variant"
+                        android:textColor="@color/accent_glow"
+                        app:strokeColor="@color/accent_glow"
                         app:strokeWidth="1dp"
-                        app:cornerRadius="12dp" />
+                        app:cornerRadius="12dp"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
 
