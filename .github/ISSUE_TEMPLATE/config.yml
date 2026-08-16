@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions / Questions
+    url: https://github.com/Parasaran-Python/pixelclarity-android/discussions
+    about: Ask questions or discuss new ideas with the community.

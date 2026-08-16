@@ -1,6 +1,9 @@
 # Real-ESRGAN Image Upscaler (Android)
 
+[![CI Pipeline](https://github.com/Parasaran-Python/pixelclarity-android/actions/workflows/ci.yml/badge.svg)](https://github.com/Parasaran-Python/pixelclarity-android/actions/workflows/ci.yml)
+
 A high-performance Android application for on-device **4x AI Super-Resolution Image Enhancement** using **Real-ESRGAN** deep learning models with **ONNX Runtime**, supporting hardware acceleration across **NPU (Hexagon / MediaTek / Google Tensor)**, **GPU**, and **multi-threaded CPU**.
+
 
 ---
 
