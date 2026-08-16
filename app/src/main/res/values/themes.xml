@@ -48,4 +48,16 @@
     <style name="Widget.RealESRGAN.DialogButton.Negative" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:textColor">@color/on_surface_variant</item>
     </style>
+
+    <!-- Fullscreen Inspector Dialog Theme -->
+    <style name="Theme.RealESRGAN.FullscreenDialog" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

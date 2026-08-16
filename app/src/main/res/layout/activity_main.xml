@@ -90,18 +90,26 @@
                         android:visibility="gone" />
 
                     <!-- Inspect Fullscreen Overlay Button -->
-                    <com.google.android.material.button.MaterialButton
+                    <!-- Inspect Fullscreen Overlay Button -->
+                    <FrameLayout
                         android:id="@+id/btnInspectFullscreen"
-                        style="@style/Widget.Material3.Button.IconButton"
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:layout_gravity="top|end"
                         android:layout_margin="12dp"
-                        app:icon="@drawable/ic_fullscreen"
-                        app:iconTint="@color/on_surface"
-                        app:backgroundTint="#990F172A"
+                        android:background="@drawable/bg_circle_dark"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:visibility="gone"
-                        android:contentDescription="@string/desc_inspect_fullscreen" />
+                        android:contentDescription="@string/desc_inspect_fullscreen">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_fullscreen"
+                            android:importantForAccessibility="no" />
+                    </FrameLayout>
 
                     <!-- Empty State Placeholder -->
                     <LinearLayout

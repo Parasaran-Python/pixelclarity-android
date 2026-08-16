@@ -1,16 +1,25 @@
 package com.pv.realesrgan.ui
 
+import android.app.Dialog
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -272,25 +281,58 @@ class MainActivity : AppCompatActivity() {
         val scaleStr = getScaleDisplayString(scale)
 
         val dialogBinding = DialogFullscreenPreviewBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
-            .setView(dialogBinding.root)
-            .create()
+        val dialog = Dialog(this, R.style.Theme_RealESRGAN_FullscreenDialog)
+        dialog.setContentView(dialogBinding.root)
 
-        // Force dialog to fill the entire screen
         dialog.window?.apply {
             setLayout(
-                android.view.WindowManager.LayoutParams.MATCH_PARENT,
-                android.view.WindowManager.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
-            setFlags(
-                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@MainActivity, R.color.background)))
+            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
+            // Setup edge-to-edge immersive mode
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+            val insetsController = WindowCompat.getInsetsController(this, decorView)
+            insetsController.hide(WindowInsetsCompat.Type.systemBars())
+            insetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
+        // Apply insets for top/bottom bars so they avoid notches and system navigation
+        ViewCompat.setOnApplyWindowInsetsListener(dialogBinding.root) { _, insets ->
+            val statusBars = insets.getInsets(
+                WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.displayCutout()
             )
-            decorView.systemUiVisibility = (
-                android.view.View.SYSTEM_UI_FLAG_FULLSCREEN or
-                android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            val navBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+
+            val density = resources.displayMetrics.density
+            val defaultPaddingH = (16 * density).toInt()
+            val defaultPaddingV = (12 * density).toInt()
+
+            dialogBinding.topBarOverlay.setPadding(
+                defaultPaddingH,
+                statusBars.top + defaultPaddingV,
+                defaultPaddingH,
+                defaultPaddingV
             )
+
+            (dialogBinding.bottomBarOverlay.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                bottomMargin = navBars.bottom + (28 * density).toInt()
+                dialogBinding.bottomBarOverlay.layoutParams = this
+            }
+
+            // Offset the badges in the slider view below the top bar and above the bottom hint
+            dialogBinding.topBarOverlay.post {
+                dialogBinding.fullscreenSliderView.badgeTopOffset =
+                    dialogBinding.topBarOverlay.height.toFloat() + 8f * density
+                dialogBinding.fullscreenSliderView.badgeBottomOffset =
+                    dialogBinding.bottomBarOverlay.height.toFloat() + 36f * density
+                dialogBinding.fullscreenSliderView.invalidate()
+            }
+
+            insets
         }
 
         val badgeLabel = getString(R.string.slider_badge_upscaled, scaleStr)
@@ -323,10 +365,10 @@ class MainActivity : AppCompatActivity() {
 
         dialog.show()
 
-        // Apply layout AFTER show() so window is created
+        // Ensure MATCH_PARENT layout is firmly applied upon showing
         dialog.window?.setLayout(
-            android.view.WindowManager.LayoutParams.MATCH_PARENT,
-            android.view.WindowManager.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
         )
     }
 

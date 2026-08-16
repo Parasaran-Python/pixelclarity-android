@@ -36,6 +36,9 @@ class BeforeAfterSliderView @JvmOverloads constructor(
     private var panX: Float = 0f
     private var panY: Float = 0f
 
+    var badgeTopOffset: Float = 0f
+    var badgeBottomOffset: Float = 0f
+
     private val minScale = 1.0f
     private val maxScale = 8.0f
 
@@ -52,7 +55,6 @@ class BeforeAfterSliderView @JvmOverloads constructor(
     private val handlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.parseColor("#38BDF8")
         style = Paint.Style.FILL
-        setShadowLayer(8f, 0f, 4f, Color.parseColor("#80000000"))
     }
 
     private val handleBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -86,7 +88,6 @@ class BeforeAfterSliderView @JvmOverloads constructor(
     private val gestureDetector: GestureDetector
 
     init {
-        setLayerType(LAYER_TYPE_SOFTWARE, null) // for shadow layer
 
         scaleGestureDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
@@ -151,6 +152,15 @@ class BeforeAfterSliderView @JvmOverloads constructor(
         panY = panY.coerceIn(-maxPanY, maxPanY)
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val desiredW = beforeBitmap?.width ?: afterBitmap?.width ?: suggestedMinimumWidth
+        val desiredH = beforeBitmap?.height ?: afterBitmap?.height ?: suggestedMinimumHeight
+
+        val w = resolveSize(desiredW, widthMeasureSpec)
+        val h = resolveSize(desiredH, heightMeasureSpec)
+        setMeasuredDimension(w, h)
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -207,9 +217,13 @@ class BeforeAfterSliderView @JvmOverloads constructor(
         canvas.restore()
 
         // 2. Draw Badges & Overlay Controls in Screen Space
-        val badgePaddingX = 24f
-        val badgePaddingY = 12f
-        val badgeMargin = 20f
+        val density = resources.displayMetrics.density
+        val badgePaddingX = 10f * density
+        val badgePaddingY = 6f * density
+        val badgeMargin = 12f * density
+        val badgeCornerRadius = 8f * density
+        val topMargin = badgeMargin + badgeTopOffset
+        val bottomMargin = badgeMargin + badgeBottomOffset
 
         // "Original" Badge (Top-Left)
         if (before != null && after != null && splitPosition > 0.15f) {
@@ -217,11 +231,11 @@ class BeforeAfterSliderView @JvmOverloads constructor(
             val beforeTextW = textPaint.measureText(beforeText)
             val beforeRect = RectF(
                 badgeMargin,
-                badgeMargin,
+                topMargin,
                 badgeMargin + beforeTextW + badgePaddingX * 2,
-                badgeMargin + textPaint.textSize + badgePaddingY * 2
+                topMargin + textPaint.textSize + badgePaddingY * 2
             )
-            canvas.drawRoundRect(beforeRect, 20f, 20f, badgeBgPaint)
+            canvas.drawRoundRect(beforeRect, badgeCornerRadius, badgeCornerRadius, badgeBgPaint)
             canvas.drawText(
                 beforeText,
                 beforeRect.left + badgePaddingX,
@@ -236,11 +250,11 @@ class BeforeAfterSliderView @JvmOverloads constructor(
             val afterTextW = textPaint.measureText(afterText)
             val afterRect = RectF(
                 w - badgeMargin - afterTextW - badgePaddingX * 2,
-                badgeMargin,
+                topMargin,
                 w - badgeMargin,
-                badgeMargin + textPaint.textSize + badgePaddingY * 2
+                topMargin + textPaint.textSize + badgePaddingY * 2
             )
-            canvas.drawRoundRect(afterRect, 20f, 20f, badgeBgPaint)
+            canvas.drawRoundRect(afterRect, badgeCornerRadius, badgeCornerRadius, badgeBgPaint)
             canvas.drawText(
                 afterText,
                 afterRect.left + badgePaddingX,
@@ -255,11 +269,11 @@ class BeforeAfterSliderView @JvmOverloads constructor(
             val zoomTextW = textPaint.measureText(zoomText)
             val zoomRect = RectF(
                 w - badgeMargin - zoomTextW - badgePaddingX * 2,
-                h - badgeMargin - textPaint.textSize - badgePaddingY * 2,
+                h - bottomMargin - textPaint.textSize - badgePaddingY * 2,
                 w - badgeMargin,
-                h - badgeMargin
+                h - bottomMargin
             )
-            canvas.drawRoundRect(zoomRect, 20f, 20f, badgeBgPaint)
+            canvas.drawRoundRect(zoomRect, badgeCornerRadius, badgeCornerRadius, badgeBgPaint)
             canvas.drawText(
                 zoomText,
                 zoomRect.left + badgePaddingX,
