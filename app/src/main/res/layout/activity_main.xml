@@ -226,6 +226,40 @@
                             android:text="Anime 6B (Fast)" />
                     </com.google.android.material.chip.ChipGroup>
 
+                    <!-- Output Scale -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scale_title"
+                        android:textColor="@color/on_surface"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="12dp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupScale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipScale4x"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/scale_4x" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipScale2x"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/scale_2x" />
+                    </com.google.android.material.chip.ChipGroup>
+
                     <!-- Hardware Delegate -->
                     <TextView
                         android:layout_width="wrap_content"

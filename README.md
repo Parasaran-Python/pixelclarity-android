@@ -18,6 +18,9 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
   - Implements overlapping padded tile inference (`128x128` or `256x256` with `10px` border padding) to eliminate seam artifacts and prevent `OutOfMemoryError` on large images.
 - 🎚️ **Interactive Before/After Slider**:
   - Real-time touch split slider allowing users to inspect original vs 4x enhanced razor-sharp details.
+- 📐 **Configurable Output Scale**:
+  - **4x (Ultra HD)**: Native 4x super-resolution for maximum detail and ultra-sharp outputs.
+  - **2x (Balanced)**: High-quality downscaled enhancement to save device storage and memory on large photos.
 - 📦 **Multiple Pre-Loaded Models**:
   - **Real-ESRGAN x4+**: 23 Residual-in-Residual Dense Blocks (RRDB) for photographic fidelity and intricate textures.
   - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art.

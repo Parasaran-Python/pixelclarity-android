@@ -22,6 +22,7 @@ class BeforeAfterSliderView @JvmOverloads constructor(
 
     private var beforeBitmap: Bitmap? = null
     private var afterBitmap: Bitmap? = null
+    private var afterLabelText: String = "Upscaled (4x HD)"
 
     private var splitPosition: Float = 0.5f // 0.0 to 1.0
 
@@ -68,9 +69,10 @@ class BeforeAfterSliderView @JvmOverloads constructor(
         setLayerType(LAYER_TYPE_SOFTWARE, null) // for shadow layer
     }
 
-    fun setBitmaps(before: Bitmap?, after: Bitmap?) {
+    fun setBitmaps(before: Bitmap?, after: Bitmap?, afterLabel: String = "Upscaled (4x HD)") {
         this.beforeBitmap = before
         this.afterBitmap = after
+        this.afterLabelText = afterLabel
         splitPosition = if (after != null) 0.5f else 1.0f
         requestLayout()
         invalidate()
@@ -144,8 +146,8 @@ class BeforeAfterSliderView @JvmOverloads constructor(
                 textPaint
             )
 
-            // "Upscaled (4x)" Badge (Right)
-            val afterText = "Upscaled (4x HD)"
+            // Upscaled Badge (Right)
+            val afterText = afterLabelText
             val afterTextW = textPaint.measureText(afterText)
             val afterRect = RectF(
                 left + drawnW - badgeMargin - afterTextW - badgePaddingX * 2,

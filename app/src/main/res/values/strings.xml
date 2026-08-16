@@ -9,6 +9,9 @@
     <string name="save_action">Save HD Image</string>
     <string name="share_action">Share</string>
     <string name="model_title">Model Architecture</string>
+    <string name="scale_title">Output Scale</string>
+    <string name="scale_4x">4x (Ultra HD)</string>
+    <string name="scale_2x">2x (Balanced)</string>
     <string name="hardware_title">Hardware Acceleration</string>
     <string name="tile_title">Tile Size</string>
     <string name="status_ready">Ready. Select an image to upscale.</string>

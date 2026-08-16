@@ -18,6 +18,7 @@ import com.pv.realesrgan.ml.RealESRGANUpscalerEngine
 import com.pv.realesrgan.ml.UpscaleConfig
 import com.pv.realesrgan.ml.UpscaleProgressListener
 import com.pv.realesrgan.utils.ImageUtils
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnPickImageEmpty.setOnClickListener(pickAction)
         binding.btnChangeImage.setOnClickListener(pickAction)
 
+        binding.chipGroupScale.setOnCheckedStateChangeListener { _, _ ->
+            updateResolutionInfo()
+        }
+
         binding.btnUpscale.setOnClickListener {
             startUpscale()
         }
@@ -75,6 +80,25 @@ class MainActivity : AppCompatActivity() {
         binding.btnAboutCredits.setOnClickListener {
             showAboutCreditsDialog()
         }
+    }
+
+    private fun getSelectedScaleMultiplier(): Float {
+        return if (binding.chipScale2x.isChecked) 2.0f else 4.0f
+    }
+
+    private fun updateResolutionInfo() {
+        val bitmap = originalBitmap ?: return
+        val inW = bitmap.width
+        val inH = bitmap.height
+        val scale = getSelectedScaleMultiplier()
+        val scaleInt = scale.toInt()
+        val outW = (inW * scale).roundToInt()
+        val outH = (inH * scale).roundToInt()
+
+        binding.cardResolutionInfo.visibility = View.VISIBLE
+        binding.tvResolutionInput.text = "Input: ${inW}x${inH}"
+        binding.tvResolutionOutput.text = "${scaleInt}x Output: ${outW}x${outH}"
+        binding.btnUpscale.text = "Upscale ${scaleInt}x (AI)"
     }
 
     private fun showAboutCreditsDialog() {
@@ -119,17 +143,11 @@ class MainActivity : AppCompatActivity() {
                     binding.sliderView.visibility = View.VISIBLE
                     binding.sliderView.setBitmaps(bitmap, null)
 
-                    val inW = bitmap.width
-                    val inH = bitmap.height
-                    val outW = inW * 4
-                    val outH = inH * 4
+                    updateResolutionInfo()
 
-                    binding.cardResolutionInfo.visibility = View.VISIBLE
-                    binding.tvResolutionInput.text = "Input: ${inW}x${inH}"
-                    binding.tvResolutionOutput.text = "4x Output: ${outW}x${outH}"
-
+                    val scaleInt = getSelectedScaleMultiplier().toInt()
                     binding.layoutSaveShare.visibility = View.GONE
-                    binding.tvStatus.text = "Image loaded (${inW}x${inH}). Tap 'Upscale 4x' to start AI enhancement."
+                    binding.tvStatus.text = "Image loaded (${bitmap.width}x${bitmap.height}). Tap 'Upscale ${scaleInt}x' to start AI enhancement."
                     binding.progressBar.visibility = View.GONE
                 } else {
                     Toast.makeText(this@MainActivity, "Failed to load image", Toast.LENGTH_SHORT).show()
@@ -158,12 +176,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         val tileSize = if (binding.chipTile128.isChecked) 128 else 256
+        val selectedScale = getSelectedScaleMultiplier()
+        val scaleInt = selectedScale.toInt()
 
         val config = UpscaleConfig(
             model = selectedModel,
             hardwareDelegate = selectedDelegate,
             tileSize = tileSize,
-            tilePad = 10
+            tilePad = 10,
+            customScaleMultiplier = selectedScale
         )
 
         updateUiState(isProcessing = true)
@@ -198,8 +219,8 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     upscaledBitmap?.recycle()
                     upscaledBitmap = result
-                    binding.sliderView.setBitmaps(originalBitmap, result)
-                    binding.tvStatus.text = "✅ 4x Upscaling complete! Drag slider to inspect high-definition details."
+                    binding.sliderView.setBitmaps(originalBitmap, result, "Upscaled (${scaleInt}x HD)")
+                    binding.tvStatus.text = "✅ ${scaleInt}x Upscaling complete! Drag slider to inspect high-definition details."
                     updateUiState(isProcessing = false)
                     binding.layoutSaveShare.visibility = View.VISIBLE
                 }
@@ -273,11 +294,15 @@ class MainActivity : AppCompatActivity() {
         binding.btnUpscale.isEnabled = !isProcessing
         binding.btnChangeImage.isEnabled = !isProcessing
         binding.chipGroupModel.isEnabled = !isProcessing
+        binding.chipGroupScale.isEnabled = !isProcessing
         binding.chipGroupHardware.isEnabled = !isProcessing
         binding.chipGroupTileSize.isEnabled = !isProcessing
 
         for (i in 0 until binding.chipGroupModel.childCount) {
             binding.chipGroupModel.getChildAt(i).isEnabled = !isProcessing
+        }
+        for (i in 0 until binding.chipGroupScale.childCount) {
+            binding.chipGroupScale.getChildAt(i).isEnabled = !isProcessing
         }
         for (i in 0 until binding.chipGroupHardware.childCount) {
             binding.chipGroupHardware.getChildAt(i).isEnabled = !isProcessing
