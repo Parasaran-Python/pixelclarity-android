@@ -18,6 +18,7 @@ import com.pv.realesrgan.ml.RealESRGANUpscalerEngine
 import com.pv.realesrgan.ml.UpscaleConfig
 import com.pv.realesrgan.ml.UpscaleProgressListener
 import com.pv.realesrgan.utils.ImageUtils
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnPickImageEmpty.setOnClickListener(pickAction)
         binding.btnChangeImage.setOnClickListener(pickAction)
 
+        binding.chipGroupScale.setOnCheckedStateChangeListener { _, _ ->
+            updateResolutionInfo()
+        }
+
         binding.btnUpscale.setOnClickListener {
             startUpscale()
         }
@@ -75,6 +80,25 @@ class MainActivity : AppCompatActivity() {
         binding.btnAboutCredits.setOnClickListener {
             showAboutCreditsDialog()
         }
+    }
+
+    private fun getSelectedScaleMultiplier(): Float {
+        return if (binding.chipScale2x.isChecked) 2.0f else 4.0f
+    }
+
+    private fun updateResolutionInfo() {
+        val bitmap = originalBitmap ?: return
+        val inW = bitmap.width
+        val inH = bitmap.height
+        val scale = getSelectedScaleMultiplier()
+        val scaleInt = scale.toInt()
+        val outW = (inW * scale).roundToInt()
+        val outH = (inH * scale).roundToInt()
+
+        binding.cardResolutionInfo.visibility = View.VISIBLE
+        binding.tvResolutionInput.text = getString(R.string.resolution_input, inW, inH)
+        binding.tvResolutionOutput.text = getString(R.string.resolution_output, scaleInt, outW, outH)
+        binding.btnUpscale.text = getString(R.string.upscale_button_action, scaleInt)
     }
 
     private fun showAboutCreditsDialog() {
@@ -119,20 +143,14 @@ class MainActivity : AppCompatActivity() {
                     binding.sliderView.visibility = View.VISIBLE
                     binding.sliderView.setBitmaps(bitmap, null)
 
-                    val inW = bitmap.width
-                    val inH = bitmap.height
-                    val outW = inW * 4
-                    val outH = inH * 4
+                    updateResolutionInfo()
 
-                    binding.cardResolutionInfo.visibility = View.VISIBLE
-                    binding.tvResolutionInput.text = "Input: ${inW}x${inH}"
-                    binding.tvResolutionOutput.text = "4x Output: ${outW}x${outH}"
-
+                    val scaleInt = getSelectedScaleMultiplier().toInt()
                     binding.layoutSaveShare.visibility = View.GONE
-                    binding.tvStatus.text = "Image loaded (${inW}x${inH}). Tap 'Upscale 4x' to start AI enhancement."
+                    binding.tvStatus.text = getString(R.string.status_image_loaded, bitmap.width, bitmap.height, scaleInt)
                     binding.progressBar.visibility = View.GONE
                 } else {
-                    Toast.makeText(this@MainActivity, "Failed to load image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_load_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -141,7 +159,7 @@ class MainActivity : AppCompatActivity() {
     private fun startUpscale() {
         val input = originalBitmap
         if (input == null) {
-            Toast.makeText(this, "Please select an image first", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_pick_image), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -158,12 +176,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         val tileSize = if (binding.chipTile128.isChecked) 128 else 256
+        val selectedScale = getSelectedScaleMultiplier()
+        val scaleInt = selectedScale.toInt()
 
         val config = UpscaleConfig(
             model = selectedModel,
             hardwareDelegate = selectedDelegate,
             tileSize = tileSize,
-            tilePad = 10
+            tilePad = 10,
+            customScaleMultiplier = selectedScale
         )
 
         updateUiState(isProcessing = true)
@@ -183,7 +204,14 @@ class MainActivity : AppCompatActivity() {
                             lifecycleScope.launch(Dispatchers.Main) {
                                 binding.progressBar.progress = progressPercent
                                 val sec = String.format("%.1f", elapsedMs / 1000f)
-                                binding.tvStatus.text = "Enhancing tile $currentTile/$totalTiles ($progressPercent%) • ${sec}s (${config.hardwareDelegate.displayName})"
+                                binding.tvStatus.text = getString(
+                                    R.string.status_upscaling_tile,
+                                    currentTile,
+                                    totalTiles,
+                                    progressPercent,
+                                    sec,
+                                    config.hardwareDelegate.displayName
+                                )
                             }
                         }
 
@@ -198,22 +226,23 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     upscaledBitmap?.recycle()
                     upscaledBitmap = result
-                    binding.sliderView.setBitmaps(originalBitmap, result)
-                    binding.tvStatus.text = "✅ 4x Upscaling complete! Drag slider to inspect high-definition details."
+                    val badgeLabel = getString(R.string.slider_badge_upscaled, scaleInt)
+                    binding.sliderView.setBitmaps(originalBitmap, result, badgeLabel)
+                    binding.tvStatus.text = getString(R.string.status_complete, scaleInt)
                     updateUiState(isProcessing = false)
                     binding.layoutSaveShare.visibility = View.VISIBLE
                 }
             } catch (e: CancellationException) {
                 withContext(Dispatchers.Main) {
-                    binding.tvStatus.text = "⚠️ Upscaling was cancelled."
+                    binding.tvStatus.text = getString(R.string.status_cancelled_warning)
                     updateUiState(isProcessing = false)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    binding.tvStatus.text = "❌ Error during upscaling: ${e.localizedMessage}"
+                    binding.tvStatus.text = getString(R.string.status_error, e.localizedMessage ?: "")
                     updateUiState(isProcessing = false)
-                    Toast.makeText(this@MainActivity, "Upscale failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_upscale_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -227,7 +256,7 @@ class MainActivity : AppCompatActivity() {
     private fun saveUpscaledImage() {
         val bmp = upscaledBitmap
         if (bmp == null) {
-            Toast.makeText(this, "No upscaled image available to save", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_save_no_image), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -235,8 +264,8 @@ class MainActivity : AppCompatActivity() {
             val uri = ImageUtils.saveBitmapToGallery(applicationContext, bmp)
             withContext(Dispatchers.Main) {
                 if (uri != null) {
-                    Snackbar.make(binding.root, "Saved to Gallery (Pictures/RealESRGAN)", Snackbar.LENGTH_LONG)
-                        .setAction("View") {
+                    Snackbar.make(binding.root, getString(R.string.gallery_saved_snackbar), Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.snackbar_view)) {
                             val intent = Intent(Intent.ACTION_VIEW).apply {
                                 setDataAndType(uri, "image/png")
                                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -244,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                         }.show()
                 } else {
-                    Toast.makeText(this@MainActivity, "Failed to save image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_save_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -261,9 +290,9 @@ class MainActivity : AppCompatActivity() {
                         putExtra(Intent.EXTRA_STREAM, uri)
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
-                    startActivity(Intent.createChooser(shareIntent, "Share Upscaled Image"))
+                    startActivity(Intent.createChooser(shareIntent, getString(R.string.chooser_share_title)))
                 } else {
-                    Toast.makeText(this@MainActivity, "Failed to prepare image for sharing", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_share_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -273,11 +302,15 @@ class MainActivity : AppCompatActivity() {
         binding.btnUpscale.isEnabled = !isProcessing
         binding.btnChangeImage.isEnabled = !isProcessing
         binding.chipGroupModel.isEnabled = !isProcessing
+        binding.chipGroupScale.isEnabled = !isProcessing
         binding.chipGroupHardware.isEnabled = !isProcessing
         binding.chipGroupTileSize.isEnabled = !isProcessing
 
         for (i in 0 until binding.chipGroupModel.childCount) {
             binding.chipGroupModel.getChildAt(i).isEnabled = !isProcessing
+        }
+        for (i in 0 until binding.chipGroupScale.childCount) {
+            binding.chipGroupScale.getChildAt(i).isEnabled = !isProcessing
         }
         for (i in 0 until binding.chipGroupHardware.childCount) {
             binding.chipGroupHardware.getChildAt(i).isEnabled = !isProcessing

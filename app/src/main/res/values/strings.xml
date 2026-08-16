@@ -9,6 +9,9 @@
     <string name="save_action">Save HD Image</string>
     <string name="share_action">Share</string>
     <string name="model_title">Model Architecture</string>
+    <string name="scale_title">Output Scale</string>
+    <string name="scale_4x">4x (Ultra HD)</string>
+    <string name="scale_2x">2x (Balanced)</string>
     <string name="hardware_title">Hardware Acceleration</string>
     <string name="tile_title">Tile Size</string>
     <string name="status_ready">Ready. Select an image to upscale.</string>
@@ -18,4 +21,22 @@
     <string name="status_cancelled">Upscaling cancelled.</string>
     <string name="before_label">Original</string>
     <string name="after_label">Upscaled (4x)</string>
+    <string name="resolution_input">Input: %1$dx%2$d</string>
+    <string name="resolution_output">%1$dx Output: %2$dx%3$d</string>
+    <string name="upscale_button_action">Upscale %1$dx (AI)</string>
+    <string name="status_image_loaded">Image loaded (%1$dx%2$d). Tap \'Upscale %3$dx\' to start AI enhancement.</string>
+    <string name="status_upscaling_tile">Enhancing tile %1$d/%2$d (%3$d%%) • %4$ss (%5$s)</string>
+    <string name="status_complete">✅ %1$dx Upscaling complete! Drag slider to inspect high-definition details.</string>
+    <string name="status_cancelled_warning">⚠️ Upscaling was cancelled.</string>
+    <string name="status_error">❌ Error during upscaling: %1$s</string>
+    <string name="slider_badge_upscaled">Upscaled (%1$dx HD)</string>
+    <string name="toast_pick_image">Please select an image first</string>
+    <string name="toast_load_failed">Failed to load image</string>
+    <string name="toast_save_no_image">No upscaled image available to save</string>
+    <string name="toast_save_failed">Failed to save image</string>
+    <string name="toast_share_failed">Failed to prepare image for sharing</string>
+    <string name="toast_upscale_failed">Upscale failed: %1$s</string>
+    <string name="gallery_saved_snackbar">Saved to Gallery (Pictures/RealESRGAN)</string>
+    <string name="snackbar_view">View</string>
+    <string name="chooser_share_title">Share Upscaled Image</string>
 </resources>

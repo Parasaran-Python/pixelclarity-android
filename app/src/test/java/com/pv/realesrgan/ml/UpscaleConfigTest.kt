@@ -35,12 +35,26 @@ class UpscaleConfigTest {
     @Test
     fun testConfigCopy() {
         val original = UpscaleConfig()
-        val modified = original.copy(tileSize = 128, hardwareDelegate = HardwareDelegate.CPU)
+        val modified = original.copy(
+            tileSize = 128,
+            hardwareDelegate = HardwareDelegate.CPU,
+            customScaleMultiplier = 2.0f
+        )
 
         assertEquals(128, modified.tileSize)
         assertEquals(HardwareDelegate.CPU, modified.hardwareDelegate)
+        assertEquals(2.0f, modified.customScaleMultiplier, 0.001f)
         assertEquals(original.model, modified.model)
         assertEquals(original.tilePad, modified.tilePad)
         assertNotEquals(original, modified)
+    }
+
+    @Test
+    fun testScaleMultiplierPresets() {
+        val config2x = UpscaleConfig(customScaleMultiplier = 2.0f)
+        val config4x = UpscaleConfig(customScaleMultiplier = 4.0f)
+
+        assertEquals(2.0f, config2x.customScaleMultiplier, 0.001f)
+        assertEquals(4.0f, config4x.customScaleMultiplier, 0.001f)
     }
 }
