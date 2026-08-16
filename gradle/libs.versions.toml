@@ -12,7 +12,7 @@ constraintlayout = "2.2.2"
 lifecycle = "2.8.7"
 coroutines = "1.11.0"
 onnxruntime = "1.29.0"
-glide = "4.16.0"
+glide = "5.0.9"
 exifinterface = "1.4.2"
 
 [libraries]
