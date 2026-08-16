@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     app:icon="@drawable/ic_link"
                     app:iconTint="@color/accent_glow"
-                    android:contentDescription="Load Image from URL" />
+                    android:contentDescription="@string/desc_load_url" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAboutCredits"
@@ -65,7 +65,7 @@
                     android:layout_height="48dp"
                     app:icon="@drawable/ic_info"
                     app:iconTint="@color/on_surface_variant"
-                    android:contentDescription="About and Credits" />
+                    android:contentDescription="@string/desc_about_credits" />
             </LinearLayout>
 
             <!-- Image Preview Box / Before-After Slider -->
@@ -107,7 +107,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No Image Selected"
+                            android:text="@string/empty_state_title"
                             android:textColor="@color/on_surface"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -116,7 +116,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Select from gallery or load from URL to enhance with AI"
+                            android:text="@string/empty_state_description"
                             android:textColor="@color/on_surface_variant"
                             android:textSize="13sp"
                             android:textAlignment="center"

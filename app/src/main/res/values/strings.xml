@@ -2,6 +2,10 @@
 <resources>
     <string name="app_name">Real-ESRGAN Upscaler</string>
     <string name="app_tagline">On-Device AI Super-Resolution (NPU / GPU / CPU)</string>
+    <string name="desc_load_url">Load Image from URL</string>
+    <string name="desc_about_credits">About and Credits</string>
+    <string name="empty_state_title">No Image Selected</string>
+    <string name="empty_state_description">Select from gallery or load from URL to enhance with AI</string>
     <string name="pick_image">Choose from Gallery</string>
     <string name="load_url">Load from URL</string>
     <string name="change_image">Change Image</string>
@@ -11,6 +15,8 @@
     <string name="dialog_url_title">Load Image from URL</string>
     <string name="dialog_url_description">Enter a direct image link (JPEG, PNG, WebP) to upscale.</string>
     <string name="hint_image_url">https://example.com/image.jpg</string>
+    <string name="sample_photo_url" translatable="false">https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/0014.jpg</string>
+    <string name="sample_anime_url" translatable="false">https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/comic_input1.png</string>
     <string name="quick_samples_title">Quick Samples</string>
     <string name="chip_sample_photo">📸 Sample Photo</string>
     <string name="chip_sample_anime">🎨 Sample Anime</string>
@@ -19,7 +25,7 @@
     <string name="dialog_action_cancel">Cancel</string>
     <string name="error_empty_url">Please enter a valid image URL</string>
     <string name="error_invalid_url">Invalid URL format. Must start with http:// or https://</string>
-    <string name="status_downloading_url">Downloading image from URL...</string>
+    <string name="status_downloading_url">Downloading image from URL&#8230;</string>
     <string name="upscale_action">Upscale 4x (AI)</string>
     <string name="cancel_action">Cancel</string>
     <string name="save_action">Save HD Image</string>
@@ -31,7 +37,7 @@
     <string name="hardware_title">Hardware Acceleration</string>
     <string name="tile_title">Tile Size</string>
     <string name="status_ready">Ready. Select an image to upscale.</string>
-    <string name="status_processing">Processing tiles with Real-ESRGAN...</string>
+    <string name="status_processing">Processing tiles with Real-ESRGAN&#8230;</string>
     <string name="status_success">Upscaling completed successfully!</string>
     <string name="status_failed">Upscaling failed.</string>
     <string name="status_cancelled">Upscaling cancelled.</string>

@@ -145,12 +145,12 @@ class MainActivity : AppCompatActivity() {
 
         // Quick sample chips for 1-click loading & testing
         dialogBinding.chipSamplePhoto.setOnClickListener {
-            dialogBinding.etImageUrl.setText("https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/0014.jpg")
+            dialogBinding.etImageUrl.setText(getString(R.string.sample_photo_url))
             dialogBinding.tilImageUrl.error = null
         }
 
         dialogBinding.chipSampleAnime.setOnClickListener {
-            dialogBinding.etImageUrl.setText("https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/inputs/comic_input1.png")
+            dialogBinding.etImageUrl.setText(getString(R.string.sample_anime_url))
             dialogBinding.tilImageUrl.error = null
         }
 
