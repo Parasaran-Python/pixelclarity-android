@@ -2,6 +2,7 @@ package com.pv.realesrgan.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.pv.realesrgan.R
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -130,7 +131,7 @@ class BeforeAfterSliderView @JvmOverloads constructor(
             val badgeMargin = 24f
 
             // "Original" Badge (Left)
-            val beforeText = "Original"
+            val beforeText = context.getString(R.string.before_label)
             val beforeTextW = textPaint.measureText(beforeText)
             val beforeRect = RectF(
                 left + badgeMargin,
