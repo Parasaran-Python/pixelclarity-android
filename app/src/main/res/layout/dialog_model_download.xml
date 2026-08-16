@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_download"
+            app:tint="@color/accent_glow"
+            android:contentDescription="@string/desc_download_model" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tvDialogModelTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/on_surface"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Real-ESRGAN x4+ (68.6 MB)" />
+
+            <TextView
+                android:id="@+id/tvDialogModelDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                tools:text="High detail • 23 Residual Blocks • Best for Photos/Art" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_download_notice"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="13sp"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="2dp" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressDownload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:indicatorColor="@color/accent_glow"
+        app:trackColor="@color/surface_variant"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="6dp" />
+
+    <TextView
+        android:id="@+id/tvDownloadProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:gravity="end"
+        tools:text="14.2 MB / 68.6 MB (21%)" />
+
+</LinearLayout>

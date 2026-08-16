@@ -29,8 +29,10 @@ import com.pv.realesrgan.R
 import com.pv.realesrgan.databinding.ActivityMainBinding
 import com.pv.realesrgan.databinding.DialogFullscreenPreviewBinding
 import com.pv.realesrgan.databinding.DialogLoadUrlBinding
+import com.pv.realesrgan.databinding.DialogModelDownloadBinding
 import com.pv.realesrgan.ml.HardwareDelegate
 import com.pv.realesrgan.ml.ModelArchitecture
+import com.pv.realesrgan.ml.ModelManager
 import com.pv.realesrgan.ml.RealESRGANUpscalerEngine
 import com.pv.realesrgan.ml.UpscaleConfig
 import com.pv.realesrgan.ml.UpscaleProgressListener
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         upscalerEngine = RealESRGANUpscalerEngine(applicationContext)
 
         setupListeners()
+        updateModelChipsState()
         updateUiState(isProcessing = false)
     }
 
@@ -89,6 +92,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnInspectFullscreen.setOnClickListener {
             showFullscreenPreviewDialog()
+        }
+
+        binding.chipGroupModel.setOnCheckedStateChangeListener { _, _ ->
+            updateModelChipsState()
+        }
+
+        binding.chipModelX4Plus.setOnLongClickListener {
+            showManageModelDialog(ModelArchitecture.REAL_ESRGAN_X4PLUS)
+            true
+        }
+
+        binding.chipModelAnime6B.setOnLongClickListener {
+            showManageModelDialog(ModelArchitecture.REAL_ESRGAN_ANIME_6B)
+            true
         }
 
         binding.chipGroupScale.setOnCheckedStateChangeListener { _, checkedIds ->
@@ -137,6 +154,149 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnAboutCredits.setOnClickListener {
             showAboutCreditsDialog()
+        }
+    }
+
+    private fun updateModelChipsState() {
+        val x4Available = ModelManager.isModelAvailable(this, ModelArchitecture.REAL_ESRGAN_X4PLUS)
+        val animeAvailable = ModelManager.isModelAvailable(this, ModelArchitecture.REAL_ESRGAN_ANIME_6B)
+
+        binding.chipModelX4Plus.text = if (x4Available) {
+            getString(R.string.model_real_esrgan_x4plus)
+        } else {
+            getString(R.string.model_x4plus_chip_download)
+        }
+
+        binding.chipModelAnime6B.text = if (animeAvailable) {
+            getString(R.string.model_anime_6b)
+        } else {
+            getString(R.string.model_anime_chip_download)
+        }
+    }
+
+    private fun showManageModelDialog(model: ModelArchitecture) {
+        val isDownloaded = ModelManager.isModelDownloaded(this, model)
+        val isAssets = ModelManager.isModelInAssets(this, model)
+        val file = ModelManager.getModelFile(this, model)
+        val sizeStr = if (isDownloaded) formatBytes(file.length()) else model.sizeFormatted
+
+        val statusMsg = when {
+            isDownloaded -> getString(R.string.model_status_downloaded, sizeStr)
+            isAssets -> getString(R.string.model_status_assets, sizeStr)
+            else -> getString(R.string.model_status_not_downloaded, sizeStr)
+        }
+
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle(model.title)
+            .setMessage("${model.description}\n\n$statusMsg")
+            .setNegativeButton(R.string.dialog_action_cancel, null)
+
+        if (isDownloaded) {
+            builder.setPositiveButton(R.string.dialog_action_delete_download) { _, _ ->
+                if (ModelManager.deleteModel(this, model)) {
+                    updateModelChipsState()
+                    Toast.makeText(this, getString(R.string.toast_model_deleted, model.title), Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else if (!isAssets) {
+            builder.setPositiveButton(getString(R.string.dialog_action_download, model.sizeFormatted)) { _, _ ->
+                ensureModelAvailable(model) {
+                    Toast.makeText(this, getString(R.string.toast_download_success, model.title), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        builder.show()
+    }
+
+    private fun ensureModelAvailable(model: ModelArchitecture, onReady: () -> Unit) {
+        if (ModelManager.isModelAvailable(this, model)) {
+            onReady()
+            return
+        }
+
+        val dialogBinding = DialogModelDownloadBinding.inflate(layoutInflater)
+        dialogBinding.tvDialogModelTitle.text = "${model.title} (${model.sizeFormatted})"
+        dialogBinding.tvDialogModelDesc.text = model.description
+
+        var downloadJob: Job? = null
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.dialog_download_model_title)
+            .setView(dialogBinding.root)
+            .setPositiveButton(getString(R.string.dialog_action_download, model.sizeFormatted), null)
+            .setNegativeButton(R.string.dialog_action_cancel) { _, _ ->
+                downloadJob?.cancel()
+            }
+            .setCancelable(false)
+            .create()
+
+        dialog.setOnShowListener {
+            val downloadBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+
+            downloadBtn.setOnClickListener {
+                downloadBtn.isEnabled = false
+                dialogBinding.progressDownload.visibility = View.VISIBLE
+                dialogBinding.progressDownload.isIndeterminate = false
+                dialogBinding.progressDownload.progress = 0
+                dialogBinding.tvDownloadProgress.visibility = View.VISIBLE
+                dialogBinding.tvDownloadProgress.text = "Connecting..."
+
+                downloadJob = lifecycleScope.launch {
+                    val result = ModelManager.downloadModel(
+                        context = applicationContext,
+                        model = model,
+                        onProgress = { percent, downloadedBytes, totalBytes ->
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                dialogBinding.progressDownload.progress = percent
+                                dialogBinding.tvDownloadProgress.text = getString(
+                                    R.string.model_download_progress_format,
+                                    formatBytes(downloadedBytes),
+                                    formatBytes(totalBytes),
+                                    percent
+                                )
+                            }
+                        }
+                    )
+
+                    withContext(Dispatchers.Main) {
+                        result.onSuccess {
+                            updateModelChipsState()
+                            dialog.dismiss()
+                            Toast.makeText(
+                                this@MainActivity,
+                                getString(R.string.toast_download_success, model.title),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            onReady()
+                        }.onFailure { ex ->
+                            if (ex is CancellationException) {
+                                dialog.dismiss()
+                                return@withContext
+                            }
+                            dialogBinding.progressDownload.visibility = View.GONE
+                            dialogBinding.tvDownloadProgress.text = getString(R.string.status_error, ex.localizedMessage ?: "Download failed")
+                            downloadBtn.isEnabled = true
+                            downloadBtn.text = getString(R.string.dialog_action_download, model.sizeFormatted)
+                            Toast.makeText(
+                                this@MainActivity,
+                                getString(R.string.toast_download_failed, ex.localizedMessage ?: ex.message ?: ""),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                }
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun formatBytes(bytes: Long): String {
+        return if (bytes < 1024 * 1024) {
+            String.format(Locale.US, "%.1f KB", bytes / 1024f)
+        } else {
+            String.format(Locale.US, "%.1f MB", bytes / (1024f * 1024f))
         }
     }
 
@@ -388,6 +548,7 @@ class MainActivity : AppCompatActivity() {
             
             ⚙️ On-Device Runtime:
             • Engine: Microsoft ONNX Runtime Mobile (MIT License)
+            • Storage: Direct native memory-mapped internal storage
             • Acceleration: Android NNAPI / Qualcomm Hexagon NPU / ARM NEON
         """.trimIndent()
 
@@ -443,6 +604,12 @@ class MainActivity : AppCompatActivity() {
             ModelArchitecture.REAL_ESRGAN_X4PLUS
         }
 
+        ensureModelAvailable(selectedModel) {
+            performUpscale(input, selectedModel)
+        }
+    }
+
+    private fun performUpscale(input: Bitmap, selectedModel: ModelArchitecture) {
         val selectedDelegate = when {
             binding.chipHwNpu.isChecked -> HardwareDelegate.NPU_NNAPI
             binding.chipHwCpu.isChecked -> HardwareDelegate.CPU

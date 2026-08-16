@@ -11,7 +11,6 @@ import ai.onnxruntime.OrtSession
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 import java.nio.FloatBuffer
-import java.util.EnumSet
 import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.min
@@ -57,8 +56,20 @@ class RealESRGANUpscalerEngine(private val context: Context) : AutoCloseable {
             }
         }
 
-        val modelBytes = context.assets.open(model.assetFileName).use { it.readBytes() }
-        ortSession = ortEnv.createSession(modelBytes, sessionOptions)
+        val modelFile = ModelManager.getModelFile(context, model)
+        if (modelFile.exists() && modelFile.length() > 0) {
+            // High efficiency: load directly via native memory-mapping from internal storage
+            ortSession = ortEnv.createSession(modelFile.absolutePath, sessionOptions)
+        } else if (ModelManager.isModelInAssets(context, model)) {
+            // Fallback for custom dev builds with pre-bundled assets
+            val modelBytes = context.assets.open(model.assetFileName).use { it.readBytes() }
+            ortSession = ortEnv.createSession(modelBytes, sessionOptions)
+        } else {
+            throw IllegalStateException(
+                "Model '${model.title}' is not available. Please download it first."
+            )
+        }
+
         currentModel = model
         currentDelegate = delegate
     }
