@@ -3,6 +3,8 @@ package com.pv.realesrgan.ml
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import androidx.core.graphics.createBitmap
+import androidx.core.graphics.scale
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
@@ -77,7 +79,7 @@ class RealESRGANUpscalerEngine(private val context: Context) : AutoCloseable {
         val outWidth = inWidth * scale
         val outHeight = inHeight * scale
 
-        val outputBitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888)
+        val outputBitmap = createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888)
 
         val tileSize = config.tileSize
         val tilePad = config.tilePad
@@ -212,7 +214,7 @@ class RealESRGANUpscalerEngine(private val context: Context) : AutoCloseable {
         if (config.customScaleMultiplier > 0 && config.customScaleMultiplier != 4.0f) {
             val finalW = (inWidth * config.customScaleMultiplier).roundToInt()
             val finalH = (inHeight * config.customScaleMultiplier).roundToInt()
-            val rescaled = Bitmap.createScaledBitmap(outputBitmap, finalW, finalH, true)
+            val rescaled = outputBitmap.scale(finalW, finalH, true)
             outputBitmap.recycle()
             return rescaled
         }

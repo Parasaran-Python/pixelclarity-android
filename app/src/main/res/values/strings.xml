@@ -44,7 +44,19 @@
     <string name="hardware_title">Hardware Acceleration</string>
     <string name="tile_title">Tile Size</string>
     <string name="status_ready">Ready. Select an image to upscale.</string>
-    <string name="status_cancelled">Upscaling cancelled.</string>
+    <string name="resolution_arrow" translatable="false">➔</string>
+    <string name="model_real_esrgan_x4plus">Real-ESRGAN x4+ (HD)</string>
+    <string name="model_anime_6b">Anime 6B (Fast)</string>
+    <string name="scale_preset_1_5x">1.5x</string>
+    <string name="scale_preset_3_0x">3.0x</string>
+    <string name="scale_preset_5_0x">5.0x</string>
+    <string name="scale_preset_8_0x">8.0x</string>
+    <string name="hw_auto">⚡ Auto (NPU/GPU)</string>
+    <string name="hw_npu">🧠 NPU / NNAPI</string>
+    <string name="hw_cpu">💻 CPU</string>
+    <string name="tile_256">256x256 (Standard)</string>
+    <string name="tile_128">128x128 (Low-RAM)</string>
+    <string name="zoom_badge_format">🔍 %1$s (Double-tap to reset)</string>
     <string name="before_label">Original</string>
     <string name="resolution_input">Input: %1$dx%2$d</string>
     <string name="resolution_output">%1$s Output: %2$dx%3$d</string>

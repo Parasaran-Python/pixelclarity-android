@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -16,11 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
+import java.util.Locale
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.pv.realesrgan.R
@@ -256,7 +258,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getScaleDisplayString(scale: Float): String {
-        return if (scale % 1.0f == 0f) "${scale.toInt()}x" else String.format("%.1fx", scale)
+        return if (scale % 1.0f == 0f) "${scale.toInt()}x" else String.format(Locale.US, "%.1fx", scale)
     }
 
     private fun updateResolutionInfo() {
@@ -289,7 +291,7 @@ class MainActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@MainActivity, R.color.background)))
+            setBackgroundDrawable(ContextCompat.getColor(this@MainActivity, R.color.background).toDrawable())
             clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
             // Setup edge-to-edge immersive mode
@@ -393,7 +395,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle("Credits & Attribution")
             .setMessage(creditsMessage)
             .setPositiveButton("Open GitHub") { _, _ ->
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/xinntao/Real-ESRGAN"))
+                val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/xinntao/Real-ESRGAN".toUri())
                 startActivity(browserIntent)
             }
             .setNegativeButton("Close", null)
@@ -475,7 +477,7 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             lifecycleScope.launch(Dispatchers.Main) {
                                 binding.progressBar.progress = progressPercent
-                                val sec = String.format("%.1f", elapsedMs / 1000f)
+                                val sec = String.format(Locale.US, "%.1f", elapsedMs / 1000f)
                                 binding.tvStatus.text = getString(
                                     R.string.status_upscaling_tile,
                                     currentTile,

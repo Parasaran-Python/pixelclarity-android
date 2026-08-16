@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -124,6 +123,7 @@
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:src="@drawable/ic_image_placeholder"
+                            android:importantForAccessibility="no"
                             app:tint="@color/on_surface_variant" />
 
                         <TextView
@@ -207,7 +207,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Input: 512x512"
+                        tools:text="Input: 512x512"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -215,7 +215,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➔"
+                        android:text="@string/resolution_arrow"
                         android:textColor="@color/accent_glow"
                         android:textSize="14sp"
                         android:layout_marginHorizontal="8dp" />
@@ -225,7 +225,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Output: 2048x2048"
+                        tools:text="Output: 2048x2048"
                         android:textColor="@color/accent_glow"
                         android:textSize="13sp"
                         android:textStyle="bold"
@@ -273,14 +273,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="Real-ESRGAN x4+ (HD)" />
+                            android:text="@string/model_real_esrgan_x4plus" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipModelAnime6B"
                             style="@style/Widget.Material3.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Anime 6B (Fast)" />
+                            android:text="@string/model_anime_6b" />
                     </com.google.android.material.chip.ChipGroup>
 
                     <!-- Output Scale -->
@@ -356,7 +356,7 @@
                                 android:id="@+id/tvCustomScaleValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3.0x"
+                                android:text="@string/scale_preset_3_0x"
                                 android:textColor="@color/accent_glow"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
@@ -384,7 +384,7 @@
                                 style="@style/Widget.Material3.Chip.Assist"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1.5x"
+                                android:text="@string/scale_preset_1_5x"
                                 android:textColor="@color/on_surface"
                                 app:chipBackgroundColor="@color/surface_variant"
                                 app:chipStrokeColor="@color/divider" />
@@ -394,7 +394,7 @@
                                 style="@style/Widget.Material3.Chip.Assist"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3.0x"
+                                android:text="@string/scale_preset_3_0x"
                                 android:textColor="@color/on_surface"
                                 app:chipBackgroundColor="@color/surface_variant"
                                 app:chipStrokeColor="@color/divider" />
@@ -404,7 +404,7 @@
                                 style="@style/Widget.Material3.Chip.Assist"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5.0x"
+                                android:text="@string/scale_preset_5_0x"
                                 android:textColor="@color/on_surface"
                                 app:chipBackgroundColor="@color/surface_variant"
                                 app:chipStrokeColor="@color/divider" />
@@ -414,7 +414,7 @@
                                 style="@style/Widget.Material3.Chip.Assist"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="8.0x"
+                                android:text="@string/scale_preset_8_0x"
                                 android:textColor="@color/on_surface"
                                 app:chipBackgroundColor="@color/surface_variant"
                                 app:chipStrokeColor="@color/divider" />
@@ -445,21 +445,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="⚡ Auto (NPU/GPU)" />
+                            android:text="@string/hw_auto" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipHwNpu"
                             style="@style/Widget.Material3.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🧠 NPU / NNAPI" />
+                            android:text="@string/hw_npu" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipHwCpu"
                             style="@style/Widget.Material3.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="💻 CPU" />
+                            android:text="@string/hw_cpu" />
                     </com.google.android.material.chip.ChipGroup>
 
                     <!-- Tile Size -->
@@ -486,14 +486,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="256x256 (Standard)" />
+                            android:text="@string/tile_256" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipTile128"
                             style="@style/Widget.Material3.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="128x128 (Low-RAM)" />
+                            android:text="@string/tile_128" />
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
