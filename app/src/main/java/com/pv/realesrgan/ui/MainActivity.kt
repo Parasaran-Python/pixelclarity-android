@@ -181,9 +181,9 @@ class MainActivity : AppCompatActivity() {
         val sizeStr = if (isDownloaded) formatBytes(file.length()) else model.sizeFormatted
 
         val statusMsg = when {
-            isDownloaded -> "Model is saved in internal app storage ($sizeStr)."
-            isAssets -> "Model is pre-bundled in app assets ($sizeStr)."
-            else -> "Model is not yet downloaded ($sizeStr required for first use)."
+            isDownloaded -> getString(R.string.model_status_downloaded, sizeStr)
+            isAssets -> getString(R.string.model_status_assets, sizeStr)
+            else -> getString(R.string.model_status_not_downloaded, sizeStr)
         }
 
         val builder = MaterialAlertDialogBuilder(this)
@@ -192,14 +192,14 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton(R.string.dialog_action_cancel, null)
 
         if (isDownloaded) {
-            builder.setPositiveButton("Delete Download") { _, _ ->
+            builder.setPositiveButton(R.string.dialog_action_delete_download) { _, _ ->
                 if (ModelManager.deleteModel(this, model)) {
                     updateModelChipsState()
-                    Toast.makeText(this, "Deleted ${model.title} from internal storage", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.toast_model_deleted, model.title), Toast.LENGTH_SHORT).show()
                 }
             }
         } else if (!isAssets) {
-            builder.setPositiveButton("Download (${model.sizeFormatted})") { _, _ ->
+            builder.setPositiveButton(getString(R.string.dialog_action_download, model.sizeFormatted)) { _, _ ->
                 ensureModelAvailable(model) {
                     Toast.makeText(this, getString(R.string.toast_download_success, model.title), Toast.LENGTH_SHORT).show()
                 }
@@ -270,6 +270,10 @@ class MainActivity : AppCompatActivity() {
                             ).show()
                             onReady()
                         }.onFailure { ex ->
+                            if (ex is CancellationException) {
+                                dialog.dismiss()
+                                return@withContext
+                            }
                             dialogBinding.progressDownload.visibility = View.GONE
                             dialogBinding.tvDownloadProgress.text = getString(R.string.status_error, ex.localizedMessage ?: "Download failed")
                             downloadBtn.isEnabled = true

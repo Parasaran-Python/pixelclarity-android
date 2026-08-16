@@ -110,6 +110,9 @@ object ModelManager {
                 tmpFile.outputStream().use { output ->
                     val buffer = ByteArray(BUFFER_SIZE)
                     var bytesRead: Int
+                    var lastReportedTime = 0L
+                    var lastReportedPercent = -1
+
                     while (input.read(buffer).also { bytesRead = it } != -1) {
                         currentCoroutineContext().ensureActive()
                         output.write(buffer, 0, bytesRead)
@@ -120,7 +123,13 @@ object ModelManager {
                         } else {
                             0
                         }
-                        onProgress(percent, downloadedBytes, totalBytes)
+
+                        val now = System.currentTimeMillis()
+                        if (percent != lastReportedPercent || now - lastReportedTime > 64 || downloadedBytes == totalBytes) {
+                            lastReportedPercent = percent
+                            lastReportedTime = now
+                            onProgress(percent, downloadedBytes, totalBytes)
+                        }
                     }
                     output.flush()
                 }

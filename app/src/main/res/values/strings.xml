@@ -53,7 +53,12 @@
     <string name="dialog_download_model_title">Download Model</string>
     <string name="dialog_download_notice">This deep learning model will be downloaded once from GitHub Releases and saved to secure internal storage for fast, 100% offline inference.</string>
     <string name="dialog_action_download">Download (%1$s)</string>
+    <string name="dialog_action_delete_download">Delete Download</string>
+    <string name="model_status_downloaded">Model is saved in internal app storage (%1$s).</string>
+    <string name="model_status_assets">Model is pre-bundled in app assets (%1$s).</string>
+    <string name="model_status_not_downloaded">Model is not yet downloaded (%1$s required for first use).</string>
     <string name="status_model_downloading">Downloading AI model %1$s (%2$d%%)&#8230;</string>
+    <string name="toast_model_deleted">Deleted %1$s from internal storage</string>
     <string name="toast_download_failed">Model download failed: %1$s</string>
     <string name="toast_download_success">Model %1$s downloaded and ready for offline use!</string>
     <string name="model_download_progress_format">%1$s / %2$s (%3$d%%)</string>
