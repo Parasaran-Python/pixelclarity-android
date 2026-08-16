@@ -9,7 +9,12 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
 
 ## ✨ Features
 
-- ⚡ **On-Device Local Inference**: 100% offline, zero cloud dependencies, private and fast.
+- ⚡ **On-Device Local Inference**: 100% offline once downloaded, zero cloud dependencies, private and fast.
+- 📦 **Lazy-Loaded Model Storage & Lightweight Footprint**:
+  - Deep learning models are hosted on official [GitHub Releases (v1.0.0-models)](https://github.com/Parasaran-Python/pixelclarity-android/releases/tag/v1.0.0-models) and downloaded on-demand into app internal storage (`noBackupFilesDir`).
+  - Native memory mapping (`mmap`) avoids Java heap RAM spikes.
+  - Built-in SHA-256 integrity verification guarantees corrupted downloads are caught before execution.
+  - Model storage management: Long-press any model chip to inspect disk usage or delete downloaded models to free space.
 - 🧠 **Hardware Acceleration**:
   - **NPU / NNAPI**: Leverages dedicated mobile Neural Processing Units (Qualcomm Hexagon, MediaTek NeuroPilot, Google Tensor TPU).
   - **Auto**: Intelligently selects the fastest available hardware delegate.
@@ -21,9 +26,10 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
 - 📐 **Configurable Output Scale**:
   - **4x (Ultra HD)**: Native 4x super-resolution for maximum detail and ultra-sharp outputs.
   - **2x (Balanced)**: High-quality downscaled enhancement to save device storage and memory on large photos.
-- 📦 **Multiple Pre-Loaded Models**:
-  - **Real-ESRGAN x4+**: 23 Residual-in-Residual Dense Blocks (RRDB) for photographic fidelity and intricate textures.
-  - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art.
+  - **Custom Multipliers (1.5x - 8.0x)**: Fluid slider with instant presets.
+- 🖼️ **Multiple Available Models**:
+  - **Real-ESRGAN x4+**: 23 Residual-in-Residual Dense Blocks (RRDB) for photographic fidelity and intricate textures (68.6 MB).
+  - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art (18.3 MB).
 - 🌐 **Flexible Image Input (Gallery & URL)**:
   - Select photos from local device storage or directly download images from any web URL (HTTP/HTTPS) with 1-click sample presets and clipboard auto-paste.
 - 💾 **Save & Instant Sharing**:
@@ -39,13 +45,11 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
 RealESRGANUpscaler/
 ├── app/
 │   ├── src/main/
-│   │   ├── assets/models/
-│   │   │   ├── realesrgan_x4plus.onnx    # 23 RRDB block model (68.6 MB)
-│   │   │   └── realesrgan_anime_6b.onnx   # 6 RRDB block model (18.3 MB)
 │   │   ├── java/com/pv/realesrgan/
 │   │   │   ├── ml/
 │   │   │   │   ├── HardwareDelegate.kt        # Auto, NPU/NNAPI, CPU selectors
-│   │   │   │   ├── ModelArchitecture.kt       # Model configurations & metadata
+│   │   │   │   ├── ModelArchitecture.kt       # Model configurations & remote metadata
+│   │   │   │   ├── ModelManager.kt            # On-demand downloader, SHA-256 verifier & internal storage cache
 │   │   │   │   ├── RealESRGANUpscalerEngine.kt # Tiled ONNX Runtime inference engine
 │   │   │   │   └── UpscaleConfig.kt           # Parameter encapsulation
 │   │   │   ├── ui/
@@ -54,7 +58,11 @@ RealESRGANUpscaler/
 │   │   │   └── utils/
 │   │   │       └── ImageUtils.kt              # EXIF rotation, MediaStore & caching
 │   │   └── res/
-│   │       ├── layout/activity_main.xml
+│   │       ├── layout/
+│   │       │   ├── activity_main.xml
+│   │       │   ├── dialog_fullscreen_preview.xml
+│   │       │   ├── dialog_load_url.xml
+│   │       │   └── dialog_model_download.xml  # Download progress & status UI
 │   │       └── values/ (colors, strings, themes)
 │   └── build.gradle.kts
 └── settings.gradle.kts
