@@ -27,7 +27,11 @@
         app:startIconDrawable="@drawable/ic_link"
         app:startIconTint="@color/accent_glow"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/primary"
+        app:endIconTint="@color/on_surface_variant"
+        app:boxStrokeColor="@color/accent_glow"
+        app:boxBackgroundColor="@color/surface"
+        app:hintTextColor="@color/accent_glow"
+        android:textColorHint="@color/on_surface_variant"
         app:boxCornerRadiusTopStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
@@ -40,6 +44,7 @@
             android:inputType="textUri"
             android:singleLine="true"
             android:textColor="@color/on_surface"
+            android:textColorHint="@color/on_surface_variant"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,11 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quick_samples_title"
-        android:textColor="@color/on_surface"
-        android:textSize="12sp"
+        android:textColor="@color/accent_glow"
+        android:textSize="13sp"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="6dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupSamples"
@@ -66,6 +71,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/chip_sample_photo"
+            android:textColor="@color/on_surface"
+            app:chipBackgroundColor="@color/surface_variant"
+            app:chipStrokeColor="@color/divider"
+            app:chipStrokeWidth="1dp"
             app:chipIcon="@drawable/ic_sparkle"
             app:chipIconTint="@color/accent_glow" />
 
@@ -75,6 +84,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/chip_sample_anime"
+            android:textColor="@color/on_surface"
+            app:chipBackgroundColor="@color/surface_variant"
+            app:chipStrokeColor="@color/divider"
+            app:chipStrokeWidth="1dp"
             app:chipIcon="@drawable/ic_sparkle"
             app:chipIconTint="@color/secondary" />
 
@@ -84,7 +97,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/chip_paste_clipboard"
-            app:chipIcon="@drawable/ic_link" />
+            android:textColor="@color/on_surface"
+            app:chipBackgroundColor="@color/surface_variant"
+            app:chipStrokeColor="@color/divider"
+            app:chipStrokeWidth="1dp"
+            app:chipIcon="@drawable/ic_link"
+            app:chipIconTint="@color/accent_glow" />
     </com.google.android.material.chip.ChipGroup>
 
 </LinearLayout>
