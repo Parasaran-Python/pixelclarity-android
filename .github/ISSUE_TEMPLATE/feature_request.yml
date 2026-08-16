@@ -1,0 +1,29 @@
+name: 💡 Feature Request
+description: Suggest an idea or enhancement for PixelClarity
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of what feature or enhancement you would like.
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this solve or why is this feature beneficial?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Additional Context / Alternatives
+      description: Any alternative solutions, mockups, or context you've considered.
+    validations:
+      required: false
