@@ -26,6 +26,8 @@ A high-performance Android application for on-device **4x AI Super-Resolution Im
   - **Real-ESRGAN Anime 6B**: 6 Residual Blocks optimized for speed and illustrations/anime art.
 - 💾 **Native Android MediaStore Integration**:
   - Save directly to Gallery (`Pictures/RealESRGAN`) with scoped storage support and instant system sharing.
+- 🚀 **16 KB Page Size Compatible**:
+  - Fully compliant with Android 15+ 16 KB memory page size requirements, with 16 KB ELF-aligned native binaries and uncompressed zip packaging for maximum speed and zero compatibility warnings.
 
 ---
 

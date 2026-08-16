@@ -37,6 +37,14 @@ jobs:
       - name: Build Debug APK for Release
         run: ./gradlew assembleDebug --stacktrace
 
+      - name: Set up Python for 16 KB Page Size Verification
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Verify 16 KB Page Size Alignment
+        run: python3 scripts/verify_16kb_page_size.py app/build/outputs/apk/debug/*.apk
+
       - name: Rename APK for Release
         run: |
           VERSION="${{ github.event.inputs.version_name || github.ref_name }}"
